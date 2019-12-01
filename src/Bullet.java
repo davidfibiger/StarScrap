@@ -9,6 +9,8 @@ public class Bullet extends Drawable {
 	private int direction;
 	public int order;
 	private Image starShip;
+	public boolean laser;
+	private long bornTime;
 	
 	public Bullet(double x, double y, int direction, int order, Image starShip, boolean laser) {		
 		speed = convert(2500d);
@@ -24,22 +26,29 @@ public class Bullet extends Drawable {
 		this.y = y;
 		this.order = order;
 		this.starShip = starShip;
-		/*if(laser) {
+		this.laser = laser;
+		if(laser) {
+			bornTime = System.currentTimeMillis();
 			if(direction == 1) {
-				height = 10000;
-				y -= 10000;
+				this.height = y;
+				this.y = 0;
 			}
 			if(direction == 5)
-				height = 10000;
+				this.height = 10000;
 			if(direction == 3) 				
-				width  = 10000;
-			if(direction == 7) {
-				x -= 10000;
-				width  = 10000;
+				this.width  = 10000;
+			if(direction == 7) {				
+				this.width = x;
+				this.x = 0;
 			}
 			
 			speed = 0;
-		}*/
+			/*System.out.print("x: "+ x);
+			System.out.print(" y: "+ y);
+			System.out.print(" width: "+ width);
+			System.out.println(" height: "+ height);
+			*/
+		}
 	}
 	public void paint(Graphics g, GameStatus gameStatus) {	
 		g.setColor(Color.WHITE);
@@ -52,11 +61,28 @@ public class Bullet extends Drawable {
 		
 		g.fillRect((int)x, (int)y, (int)width, (int)height);		
 	}
-	public void checkOnScreen(GameStatus gameStatus) {
+	public void checkJustification(GameStatus gameStatus) {
 		if( x < 0 - width|| x > gameStatus.getCanvas().getWidth() || y < 0 - height || y > gameStatus.getCanvas().getHeight()) {
 			gameStatus.junk.add(this);
 		}
+		long time = System.currentTimeMillis();
+		if(laser) {
+			if(bornTime < time - 50)
+				gameStatus.junk.add(this);
+		}
 	}
+	public boolean checkLaserHit(Drawable drawable) {
+		if(laser) {
+			for(double dx = drawable.x; dx <= drawable.x + drawable.width; dx++) {
+				for(double dy = drawable.y; dy <= drawable.y + drawable.width; dy++) {
+					if(dx >= x && dx <= x + width && dy >= y && dy <= y + height)
+						return true;
+				}
+			}
+		}	
+		return false;
+	}
+	
 	public void move() {
 		long time = System.currentTimeMillis();
 		if (direction == 1)

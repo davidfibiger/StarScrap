@@ -21,8 +21,8 @@ public class Player extends Drawable {
 	private long lastTimeLeftwards;
 	private long lastTimeRightwards;
 	private long lastShot = 0;
-	//private long lastLaser = 0;
-	//private boolean shooted = false;
+	private long lastLaser = 0;
+	private boolean shooted = false;
 	public int order;
 	public int lives = 1;
 	public int direction;
@@ -137,44 +137,44 @@ public class Player extends Drawable {
 	
 	void actions(ArrayList<Integer>  keysDown, GameStatus gameStatus) {
 		if(keysDown.contains(skinKey) && !gameStatus.menu) {
-			gameStatus.activeMenuPlayer = this;
+			gameStatus.activeMenuPlayers.add(this);
 			gameStatus.menu = true;
 			
 		}
 		if(keysDown.contains(shootingKey)) {
 			if(direction == 1) {
 				double bX = x + width/2 - 5/2;
-				double bY = y - 20;
+				double bY = y + height / 2;
 				shoot(gameStatus, bX, bY);
-				//laser(gameStatus, bX, bY);
+				laser(gameStatus, bX, bY);
 			}	
 			if(direction == 3) {
-				double bX = x + width;
+				double bX = x + width / 2;
 				double bY = y + height / 2 - 5/2;
 				shoot(gameStatus, bX, bY);
-				//laser(gameStatus, bX, bY);
+				laser(gameStatus, bX, bY);
 			}	
 			if(direction == 5) {
 				double bX = x + width / 2 - 5/2;
-				double bY = y + height;
+				double bY = y + height / 2;
 				shoot(gameStatus,bX, bY);
-				//laser(gameStatus, bX, bY);
+				laser(gameStatus, bX, bY);
 			}	
 			if(direction == 7) {
-				double bX = x - 20;
+				double bX = x + width / 2;
 				double bY = y + height / 2 - 5/2;
 				shoot(gameStatus, bX, bY);
-				//laser(gameStatus, bX, bY);
+				laser(gameStatus, bX, bY);
 			}
 			
 		}else {
-			//shooted = false;
-			//lastLaser = 0;
+			shooted = false;
+			lastLaser = 0;
 		}
 		
 	}
 
-	/*private void laser(GameStatus gameStatus, double x , double y) {
+	private void laser(GameStatus gameStatus, double x , double y) {
 		long time = System.currentTimeMillis();
 		
 		if(lastLaser < time - 1500  && shooted && lastLaser != 0) {
@@ -184,20 +184,20 @@ public class Player extends Drawable {
 			lastLaser = time;
 				
 		}
-	}*/
+	}
 
 	private void shoot(GameStatus gameStatus,double x , double y){
 		long time = System.currentTimeMillis();
 		
-		if(lastShot < time - 200 /*&&!shooted*/ ) {
+		if(lastShot < time - 200  && !shooted ) {
 			Bullet bullet = new Bullet(x,y, direction, order, starShip, false);
 			gameStatus.bullets.add(bullet);
 			
 			gameStatus.drawables.add(bullet);
 			//System.out.println("boom");
 			lastShot = time;
-			//  shooted = true;
-			//lastLaser = time;
+			shooted = true;
+			lastLaser = time;
 		}
 		
 	}

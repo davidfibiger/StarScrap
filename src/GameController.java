@@ -34,11 +34,12 @@ public class GameController extends MouseAdapter implements KeyListener{
 				player.actions(keysDown, gameStatus);
 			}
 			for(Bullet bullet : gameStatus.bullets) {
-				bullet.checkOnScreen(gameStatus);
+				bullet.checkJustification(gameStatus);
 				bullet.move();
 				for(Player player : gameStatus.players) { 
-					if(bullet.checkColision(bullet, player) && bullet.order != player.order) {						
-						gameStatus.junk.add(bullet);
+					if((bullet.checkColision(bullet, player) || bullet.checkLaserHit(player)) && bullet.order != player.order) {						
+						if(!bullet.laser)
+							gameStatus.junk.add(bullet);
 						player.lives--;
 						printLives(player);
 						if(player.lives <= 0) {
@@ -85,7 +86,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 		gameStatus.junk.clear();
 	}
 	public void mousePressed(MouseEvent e) {
-		//System.out.println(e.getX()+", "+e.getY());
+		System.out.println(e.getX()+", "+e.getY());
 		if(gameStatus.menu) {
 			chooseStarShip(e);
 		}
@@ -141,7 +142,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 		//System.out.println("pressed"+e.getKeyCode());
 		if(!keysDown.contains(e.getKeyCode())) {
 			keysDown.add(e.getKeyCode());
-			System.out.println(e.getKeyCode());
+			//System.out.println(e.getKeyCode());
 			//System.out.println(e.getKeyCode());
 		}
 		
