@@ -141,7 +141,7 @@ public class Player extends Drawable {
 			gameStatus.menu = true;
 			
 		}
-		if(keysDown.contains(shootingKey)) {
+		if(keysDown.contains(shootingKey) && starShip!=null) {
 			if(direction == 1) {
 				double bX = x + width/2 - 5/2;
 				double bY = y + height / 2;
@@ -177,8 +177,8 @@ public class Player extends Drawable {
 	private void laser(GameStatus gameStatus, double x , double y) {
 		long time = System.currentTimeMillis();
 		
-		if(lastLaser < time - 1500  && shooted && lastLaser != 0) {
-			Bullet laser = new Bullet(x, y, direction, order, starShip, true);
+		if(lastLaser < time - 500  && shooted && lastLaser != 0) {
+			Bullet laser = new Bullet(x, y, direction, order, starShip, true && starShip!=null);
 			gameStatus.bullets.add(laser);
 			gameStatus.drawables.add(laser);
 			lastLaser = time;
@@ -189,7 +189,7 @@ public class Player extends Drawable {
 	private void shoot(GameStatus gameStatus,double x , double y){
 		long time = System.currentTimeMillis();
 		
-		if(lastShot < time - 200  && !shooted ) {
+		if(lastShot < time - 200  && !shooted && starShip!=null) {
 			Bullet bullet = new Bullet(x,y, direction, order, starShip, false);
 			gameStatus.bullets.add(bullet);
 			

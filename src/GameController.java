@@ -41,7 +41,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 						if(!bullet.laser)
 							gameStatus.junk.add(bullet);
 						player.lives--;
-						printLives(player);
+						//printLives(player);
 						if(player.lives <= 0) {
 							respawn(player);
 						}
@@ -67,10 +67,12 @@ public class GameController extends MouseAdapter implements KeyListener{
 		}
 	}
 	public void respawn(Player player) {
-		gameStatus.activeMenuPlayers.add(player);
-		player.starShip = null;
-		gameStatus.menu = true;
-		player.lives = 1;
+		if(!gameStatus.activeMenuPlayers.contains(player)) {
+			gameStatus.activeMenuPlayers.add(player);
+			player.starShip = null;
+			gameStatus.menu = true;
+			player.lives = 1;
+		}
 	}
 	public void clear() {
 		/*
@@ -86,13 +88,18 @@ public class GameController extends MouseAdapter implements KeyListener{
 		gameStatus.junk.clear();
 	}
 	public void mousePressed(MouseEvent e) {
-		System.out.println(e.getX()+", "+e.getY());
+		//System.out.println(e.getX()+", "+e.getY());
 		if(gameStatus.menu) {
 			chooseStarShip(e);
 		}
 	}
 	private void chooseStarShip(MouseEvent e) {
-		
+		/*for(Player player : gameStatus.activeMenuPlayers) {
+			if(player.starShip != null) {				
+				gameStatus.menu = false;
+				return;
+			}
+		}*/
 		int x = (int)canvas.getWidth()/7;
 		int y = ((int)canvas.getHeight()/7)*3;
 		if(e.getY() > y && e.getY() < (y/3)*4) {
