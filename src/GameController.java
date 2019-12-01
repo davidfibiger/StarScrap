@@ -66,7 +66,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 		}
 	}
 	public void respawn(Player player) {
-		gameStatus.activeMenuPlayer = player;
+		gameStatus.activeMenuPlayers.add(player);
 		player.starShip = null;
 		gameStatus.menu = true;
 		player.lives = 1;
@@ -91,64 +91,42 @@ public class GameController extends MouseAdapter implements KeyListener{
 		}
 	}
 	private void chooseStarShip(MouseEvent e) {
+		
 		int x = (int)canvas.getWidth()/7;
 		int y = ((int)canvas.getHeight()/7)*3;
 		if(e.getY() > y && e.getY() < (y/3)*4) {
 			if(e.getX() > x && e.getX() < x*2) {				
-				activeMenuPlayerToCenter();				
-				gameStatus.activeMenuPlayer.starShip = StarScrapMain.starShip1;
+				activeMenuPlayerToCenter(gameStatus.activeMenuPlayers.get(0));				
+				gameStatus.activeMenuPlayers.get(0).starShip = StarScrapMain.starShip1;
 				endOrContinueMenu();				
 			}
 			
 			if (e.getX() > x*3 && e.getX() < x*4) {				
-				activeMenuPlayerToCenter();
-				gameStatus.activeMenuPlayer.starShip = StarScrapMain.starShip2;
+				activeMenuPlayerToCenter(gameStatus.activeMenuPlayers.get(0));
+				gameStatus.activeMenuPlayers.get(0).starShip = StarScrapMain.starShip2;
 				endOrContinueMenu();
 				
 			}
 			if(e.getX() > x*5 && e.getX() < x*6) {	
-				activeMenuPlayerToCenter();
-				gameStatus.activeMenuPlayer.starShip = StarScrapMain.starShip3;
+				activeMenuPlayerToCenter(gameStatus.activeMenuPlayers.get(0));
+				gameStatus.activeMenuPlayers.get(0).starShip = StarScrapMain.starShip3;
 				endOrContinueMenu();
 			}
 		}
+		
 	}
-	public void endOrContinueMenu() {
-		if(firstMenu) {
-			firstMenu = false;
-			boolean last = isPlayerLast();	
-			if(last) {
-				GameStatus.menu = false;
-				return;
-			}
-			boolean setNow = false;
-			for(Player player : gameStatus.players) {
-				if(setNow) {
-					gameStatus.activeMenuPlayer = player;
-				}
-				if(player == gameStatus.activeMenuPlayer) {
-					setNow = true;
-				}				
-			}
-		}else {
-			GameStatus.menu = false;
-			return;
-		}
+	public void endOrContinueMenu() {		
+		gameStatus.activeMenuPlayers.remove(0);
+		
+		if(gameStatus.activeMenuPlayers.size() == 0) 
+			gameStatus.menu = false;
+		
 	}
-	public boolean isPlayerLast() {
-		boolean last = false;
-		for(Player player : gameStatus.players) {
-			last = false;
-			if(player == gameStatus.activeMenuPlayer) {
-				last = true;						
-			}
-		}
-		return last;
-	}
-	private void activeMenuPlayerToCenter() {
-		if(gameStatus.activeMenuPlayer.starShip == null) {
-			gameStatus.activeMenuPlayer.x = gameStatus.getCanvas().getWidth()/2;
-			gameStatus.activeMenuPlayer.y = gameStatus.getCanvas().getHeight()/2;
+	
+	private void activeMenuPlayerToCenter(Player activeMenuPlayer) {
+		if(activeMenuPlayer.starShip == null) {
+			activeMenuPlayer.x = gameStatus.getCanvas().getWidth()/2;
+			activeMenuPlayer.y = gameStatus.getCanvas().getHeight()/2;
 		}
 	}
 	

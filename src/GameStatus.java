@@ -10,7 +10,8 @@ public class GameStatus {
 	ArrayList<Drawable> junk;
 	ArrayList<Bullet> bullets;
 	static boolean menu = false;
-	Player activeMenuPlayer;
+	//Player activeMenuPlayer;
+	ArrayList<Player> activeMenuPlayers;
 	Player player1;
 	Player player2;
 	//Player player3;
@@ -20,11 +21,13 @@ public class GameStatus {
 		players = new ArrayList();
 		junk = new ArrayList();
 		bullets = new ArrayList();
+		activeMenuPlayers = new ArrayList();
 		player1 = new Player(1, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SHIFT, KeyEvent.VK_SPACE, KeyEvent.VK_1);
 		player2 = new Player(2, 91, 222, 59, 92, 44, 17,KeyEvent.VK_2);
 		//player3 = new Player(3, 101, 98, 97, 99, 96, 10,KeyEvent.VK_3);
-		activeMenuPlayer = player1;
-		
+		//activeMenuPlayer = player1;
+		activeMenuPlayers.add(player1);
+		activeMenuPlayers.add(player2);
 		drawables.add(player1);
 		drawables.add(player2);
 		//drawables.add(player3);
