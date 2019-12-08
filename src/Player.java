@@ -61,11 +61,28 @@ public class Player extends Drawable {
 	    		 	
 	    }
 		g.drawImage(starShip, (int)x, (int)y, (int)width, (int)height, null);
-		
+		drawLaserBar(g, gameStatus);
 		
 		
 	}
 	
+	private void drawLaserBar(Graphics g, GameStatus gameStatus) {
+		setColor(g, starShip);	
+		int x = gameStatus.getCanvas().getWidth()/32;	
+		int y = gameStatus.getCanvas().getHeight()/18;
+		int width = x * 2;
+		int height = y / 2;
+		if(order == 1) {
+			x = gameStatus.getCanvas().getWidth()/32;			
+			g.drawRect(x,y,width, height);		
+		}else {
+			x = gameStatus.getCanvas().getWidth() - x*3;
+			g.drawRect(x,y,width, height);
+		}
+	
+		
+	}
+
 	void movementListener(GameStatus gameStatus, ArrayList<Integer> keysDown) {
 		long time = System.currentTimeMillis();
 		
@@ -189,7 +206,7 @@ public class Player extends Drawable {
 	private void shoot(GameStatus gameStatus,double x , double y){
 		long time = System.currentTimeMillis();
 		
-		if(lastShot < time - 200  && !shooted && starShip!=null) {
+		if(lastShot < time - 1  && !shooted && starShip!=null) {
 			Bullet bullet = new Bullet(x,y, direction, order, starShip, false);
 			gameStatus.bullets.add(bullet);
 			

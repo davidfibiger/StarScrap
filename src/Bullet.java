@@ -51,16 +51,11 @@ public class Bullet extends Drawable {
 		}
 	}
 	public void paint(Graphics g, GameStatus gameStatus) {	
-		g.setColor(Color.WHITE);
-		if(starShip == StarScrapMain.starShip1) 
-			g.setColor(Color.RED);
-		if(starShip == StarScrapMain.starShip2)
-			g.setColor(Color.BLUE);
-		if(starShip == StarScrapMain.starShip3)
-			g.setColor(Color.GREEN);
+		setColor(g, starShip);
 		
 		g.fillRect((int)x, (int)y, (int)width, (int)height);		
 	}
+	
 	public void checkJustification(GameStatus gameStatus) {
 		if( x < 0 - width|| x > gameStatus.getCanvas().getWidth() || y < 0 - height || y > gameStatus.getCanvas().getHeight()) {
 			gameStatus.junk.add(this);

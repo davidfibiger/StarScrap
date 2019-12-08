@@ -1,4 +1,6 @@
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 
 public  class Drawable {
@@ -67,6 +69,15 @@ public  class Drawable {
 				colision = true;
 		}			
 		return colision;
+	}
+	public void setColor(Graphics g, Image starShip) {
+		g.setColor(Color.WHITE);
+		if(starShip == StarScrapMain.starShip1) 
+			g.setColor(Color.RED);
+		if(starShip == StarScrapMain.starShip2)
+			g.setColor(Color.BLUE);
+		if(starShip == StarScrapMain.starShip3)
+			g.setColor(Color.GREEN);
 	}
 	
 }
