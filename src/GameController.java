@@ -37,7 +37,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 				bullet.checkJustification(gameStatus);
 				bullet.move();
 				for(Player player : gameStatus.players) { 
-					if((bullet.checkColision(bullet, player) || bullet.checkLaserHit(player)) && bullet.order != player.order && !gameStatus.usedLasers.contains(bullet)) {						
+					if((bullet.checkColision(bullet, player) || bullet.checkLaserHit(player)) && bullet.order != player.order && !gameStatus.usedLasers.contains(bullet) && !(player.starShip == null)) {						
 						if(!bullet.laser) {
 							gameStatus.junk.add(bullet);
 						}else {

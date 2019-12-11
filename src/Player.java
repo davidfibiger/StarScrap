@@ -88,7 +88,7 @@ public class Player extends Drawable {
 	}
 
 	public void printHP(Graphics g, GameStatus gameStatus, int x, int y, int width, int height) {
-		if(lives>0 && !gameStatus.activeMenuPlayers.contains(this)) {
+		if(lives>0) {
 			for(int helthBar = 0; helthBar < lives; helthBar++) {
 				g.fillRect(x + width/2 * helthBar + 3, y + 3, width/2 - 6, height - 6);
 			}
