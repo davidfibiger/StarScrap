@@ -37,9 +37,12 @@ public class GameController extends MouseAdapter implements KeyListener{
 				bullet.checkJustification(gameStatus);
 				bullet.move();
 				for(Player player : gameStatus.players) { 
-					if((bullet.checkColision(bullet, player) || bullet.checkLaserHit(player)) && bullet.order != player.order) {						
-						if(!bullet.laser)
+					if((bullet.checkColision(bullet, player) || bullet.checkLaserHit(player)) && bullet.order != player.order && !gameStatus.usedLasers.contains(bullet)) {						
+						if(!bullet.laser) {
 							gameStatus.junk.add(bullet);
+						}else {
+							gameStatus.usedLasers.add(bullet);
+						}
 						player.lives--;
 						//printLives(player);
 						if(player.lives <= 0) {
@@ -71,7 +74,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 			gameStatus.activeMenuPlayers.add(player);
 			player.starShip = null;
 			gameStatus.menu = true;
-			player.lives = 1;
+			player.lives = player.maxLives;
 		}
 	}
 	public void clear() {

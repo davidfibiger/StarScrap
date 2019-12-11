@@ -9,6 +9,7 @@ public class GameStatus {
 	ArrayList<Player> players;
 	ArrayList<Drawable> junk;
 	ArrayList<Bullet> bullets;
+	ArrayList<Bullet> usedLasers;
 	static boolean menu = false;
 	//Player activeMenuPlayer;
 	ArrayList<Player> activeMenuPlayers;
@@ -21,6 +22,7 @@ public class GameStatus {
 		players = new ArrayList();
 		junk = new ArrayList();
 		bullets = new ArrayList();
+		usedLasers = new ArrayList();
 		activeMenuPlayers = new ArrayList();
 		player1 = new Player(1, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SHIFT, KeyEvent.VK_SPACE, KeyEvent.VK_1);
 		player2 = new Player(2, 91, 222, 59, 92, 44, 17,KeyEvent.VK_2);

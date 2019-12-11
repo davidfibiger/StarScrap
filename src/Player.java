@@ -23,8 +23,9 @@ public class Player extends Drawable {
 	private long lastShot = 0;
 	private long lastLaser = 0;
 	private boolean shooted = false;
-	public int order;
-	public int lives = 1;
+	public int order;	
+	public int maxLives = 4;
+	public int lives = maxLives;
 	public int direction;
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {
 		GameStatus.menu = true;
@@ -61,12 +62,12 @@ public class Player extends Drawable {
 	    		 	
 	    }
 		g.drawImage(starShip, (int)x, (int)y, (int)width, (int)height, null);
-		drawLaserBar(g, gameStatus);
+		drawHpBar(g, gameStatus);
 		
 		
 	}
 	
-	private void drawLaserBar(Graphics g, GameStatus gameStatus) {
+	private void drawHpBar(Graphics g, GameStatus gameStatus) {
 		setColor(g, starShip);	
 		int x = gameStatus.getCanvas().getWidth()/32;	
 		int y = gameStatus.getCanvas().getHeight()/18;
@@ -74,13 +75,24 @@ public class Player extends Drawable {
 		int height = y / 2;
 		if(order == 1) {
 			x = gameStatus.getCanvas().getWidth()/32;			
-			g.drawRect(x,y,width, height);		
+			g.drawRect(x,y,width*2, height);		
+			printHP(g, gameStatus, x, y, width, height);
 		}else {
-			x = gameStatus.getCanvas().getWidth() - x*3;
-			g.drawRect(x,y,width, height);
+			x = gameStatus.getCanvas().getWidth() - x * (maxLives + 1);
+			g.drawRect(x,y,width * 2, height);
+			printHP(g, gameStatus, x, y, width, height);
 		}
+		
 	
 		
+	}
+
+	public void printHP(Graphics g, GameStatus gameStatus, int x, int y, int width, int height) {
+		if(lives>0 && !gameStatus.activeMenuPlayers.contains(this)) {
+			for(int helthBar = 0; helthBar < lives; helthBar++) {
+				g.fillRect(x + width/2 * helthBar + 3, y + 3, width/2 - 6, height - 6);
+			}
+		}
 	}
 
 	void movementListener(GameStatus gameStatus, ArrayList<Integer> keysDown) {
