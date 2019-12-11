@@ -24,12 +24,12 @@ public class Player extends Drawable {
 	private long lastLaser = 0;
 	private boolean shooted = false;
 	public int order;	
-	public int maxLives = 4;
+	public int maxLives = 10;
 	public int lives = maxLives;
 	public int direction;
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {
 		GameStatus.menu = true;
-		defaultSpeed = convert(1200d);
+		defaultSpeed = convert(1000d);
 		width = 80;
 		height = 80;
 		speed = defaultSpeed;
@@ -71,15 +71,15 @@ public class Player extends Drawable {
 		setColor(g, starShip);	
 		int x = gameStatus.getCanvas().getWidth()/32;	
 		int y = gameStatus.getCanvas().getHeight()/18;
-		int width = x * 2;
+		int width = x * 4;
 		int height = y / 2;
 		if(order == 1) {
 			x = gameStatus.getCanvas().getWidth()/32;			
-			g.drawRect(x,y,width*2, height);		
+			g.drawRect(x,y,width, height);		
 			printHP(g, gameStatus, x, y, width, height);
 		}else {
-			x = gameStatus.getCanvas().getWidth() - x * (maxLives + 1);
-			g.drawRect(x,y,width * 2, height);
+			x = gameStatus.getCanvas().getWidth() - x * 5;
+			g.drawRect(x,y,width , height);
 			printHP(g, gameStatus, x, y, width, height);
 		}
 		
@@ -90,7 +90,7 @@ public class Player extends Drawable {
 	public void printHP(Graphics g, GameStatus gameStatus, int x, int y, int width, int height) {
 		if(lives>0) {
 			for(int helthBar = 0; helthBar < lives; helthBar++) {
-				g.fillRect(x + width/2 * helthBar + 3, y + 3, width/2 - 6, height - 6);
+				g.fillRect(x + width/maxLives * helthBar + 3, y + 3, width/maxLives - 6, height - 6);
 			}
 		}
 	}
@@ -206,7 +206,7 @@ public class Player extends Drawable {
 	private void laser(GameStatus gameStatus, double x , double y) {
 		long time = System.currentTimeMillis();
 		
-		if(lastLaser < time - 500  && shooted && lastLaser != 0) {
+		if(lastLaser < time - 300  && shooted && lastLaser != 0) {
 			Bullet laser = new Bullet(x, y, direction, order, starShip, true && starShip!=null);
 			gameStatus.bullets.add(laser);
 			gameStatus.drawables.add(laser);
