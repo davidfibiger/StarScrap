@@ -5,10 +5,14 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.sound.sampled.Clip;
+
 public class Player extends Drawable {
 	
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	Image starShip;
+	public String shotSoundPath;
+	Sound shotSound;
 	private int forwardKey;
 	private int backwardsKey;
 	private int leftwardsKey;
@@ -27,7 +31,11 @@ public class Player extends Drawable {
 	public int maxLives = 10;
 	public int lives = maxLives;
 	public int direction;
+	
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {
+		shotSoundPath = StarScrapMain.shotSoundPath;
+		shotSound = new Sound();
+		shotSound.setFile(shotSoundPath);
 		GameStatus.menu = true;
 		defaultSpeed = convert(1000d);
 		width = 80;
@@ -170,7 +178,7 @@ public class Player extends Drawable {
 			gameStatus.menu = true;
 			
 		}
-		if(keysDown.contains(shootingKey) && starShip!=null) {
+		if(keysDown.contains(shootingKey) && starShip!=null) {			
 			if(direction == 1) {
 				double bX = x + width/2 - 5/2;
 				double bY = y + height / 2;
@@ -216,12 +224,13 @@ public class Player extends Drawable {
 	}
 
 	private void shoot(GameStatus gameStatus,double x , double y){
+		
 		long time = System.currentTimeMillis();
 		
 		if(lastShot < time - 1  && !shooted && starShip!=null) {
 			Bullet bullet = new Bullet(x,y, direction, order, starShip, false);
 			gameStatus.bullets.add(bullet);
-			
+			shotSound.play();
 			gameStatus.drawables.add(bullet);
 			//System.out.println("boom");
 			lastShot = time;

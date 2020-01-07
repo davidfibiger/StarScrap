@@ -20,6 +20,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 		this.gameStatus = gameStatus;
 		keysDown = new ArrayList<Integer>();
 		
+		
 	}
 	
 	boolean running = true;

@@ -8,6 +8,7 @@ public class StarScrapMain {
 	static Image starShip1;
 	static Image starShip2;
 	static Image starShip3;
+	static String shotSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\laserBullet.wav";
 	
 	public static void main(String[] args) {
 		Frame  f = new Frame();		
@@ -26,6 +27,7 @@ public class StarScrapMain {
             starShip1 = ImageIO.read(new File("d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\textures\\starShip1.png"));
             starShip2 = ImageIO.read(new File("d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\textures\\starShip2.png"));
             starShip3 = ImageIO.read(new File("d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\textures\\starShip3.png"));
+            
         }catch( java.io.IOException e){
             System.out.println(e.getMessage());
             e.printStackTrace();
