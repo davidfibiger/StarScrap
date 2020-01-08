@@ -13,14 +13,6 @@ public class Sound {
 	
 	public void setFile(String soundFileName) {
 		this.soundFileName = soundFileName;
-		try {
-			
-			
-		}
-		catch(Exception e){
-			System.out.println("Error: "+ e.getMessage());
-			e.printStackTrace();
-		}
 	}
 	public void play() {
 		

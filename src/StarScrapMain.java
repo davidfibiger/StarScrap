@@ -8,8 +8,9 @@ public class StarScrapMain {
 	static Image starShip1;
 	static Image starShip2;
 	static Image starShip3;
-	static String shotSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\laserBullet.wav";
-	
+	static String shotSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\pew.wav";
+	static String deathSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\death.wav";
+	static String laserSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\laser.wav";
 	public static void main(String[] args) {
 		Frame  f = new Frame();		
 		f.setExtendedState(Frame.MAXIMIZED_BOTH);

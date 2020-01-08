@@ -12,7 +12,11 @@ public class Player extends Drawable {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	Image starShip;
 	public String shotSoundPath;
-	Sound shotSound;
+	public Sound shotSound;
+	public String deathSpundPath;
+	public Sound deathSound;
+	public String laserSoundPath;
+	public Sound laserSound;
 	private int forwardKey;
 	private int backwardsKey;
 	private int leftwardsKey;
@@ -28,7 +32,7 @@ public class Player extends Drawable {
 	private long lastLaser = 0;
 	private boolean shooted = false;
 	public int order;	
-	public int maxLives = 10;
+	public int maxLives = 6;
 	public int lives = maxLives;
 	public int direction;
 	
@@ -36,6 +40,15 @@ public class Player extends Drawable {
 		shotSoundPath = StarScrapMain.shotSoundPath;
 		shotSound = new Sound();
 		shotSound.setFile(shotSoundPath);
+		
+		deathSpundPath = StarScrapMain.deathSoundPath;
+		deathSound = new Sound();
+		deathSound.setFile(deathSpundPath);
+		
+		laserSoundPath = StarScrapMain.laserSoundPath;
+		laserSound = new Sound();
+		laserSound.setFile(laserSoundPath);
+		
 		GameStatus.menu = true;
 		defaultSpeed = convert(1000d);
 		width = 80;
@@ -218,6 +231,7 @@ public class Player extends Drawable {
 			Bullet laser = new Bullet(x, y, direction, order, starShip, true && starShip!=null);
 			gameStatus.bullets.add(laser);
 			gameStatus.drawables.add(laser);
+			laserSound.play();
 			lastLaser = time;
 				
 		}
