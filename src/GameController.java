@@ -29,7 +29,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 		this.canvas = canvas;
 
 		while(running) {
-			canvas.repaint();
+			
 			for(Player player : gameStatus.players) {
 				player.movementListener(gameStatus, keysDown);
 				player.actions(keysDown, gameStatus);
@@ -58,7 +58,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 			clear();
 			
 			
-			
+			canvas.newFrame();
 		}
 		  
 		

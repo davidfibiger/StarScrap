@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 public class StarScrapMain {
 	static GameStatus gameStatus;
 	static Image starShip1;
@@ -12,12 +13,11 @@ public class StarScrapMain {
 	static String deathSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\death.wav";
 	static String laserSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\laser.wav";
 	public static void main(String[] args) {
-		Frame  f = new Frame();		
+		JFrame  f = new JFrame();		
 		f.setExtendedState(Frame.MAXIMIZED_BOTH);
 		f.setLayout(null);
 		ProgrammeKiller pk = new ProgrammeKiller();
 		f.addWindowListener(pk);
-		f.setMinimumSize(new Dimension(600, 600));
 		gameStatus = new GameStatus();
 		f.setVisible(true);
 		DrawingCanvas canvas = new DrawingCanvas(f);
