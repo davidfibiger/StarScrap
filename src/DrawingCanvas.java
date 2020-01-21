@@ -32,17 +32,17 @@ public class DrawingCanvas extends Canvas {
 	public void setStrategy(BufferStrategy strategy) {
 		this.strategy = strategy;
 	}
-	public void paint(Graphics g){
+	public void paint(Graphics g, int fps){
        	
         for(int i = 0; i < StarScrapMain.gameStatus.drawables.size(); i++) {
         	Drawable drawable = StarScrapMain.gameStatus.drawables.get(i);
         	drawable.paint(g, StarScrapMain.gameStatus);
         	
         }
-
+        drawText(g, String.valueOf(fps));
 	}
 
-	public void newFrame() {
+	public void newFrame(int fps) {
 		// TODO Auto-generated method stub
 		Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 		
@@ -50,11 +50,15 @@ public class DrawingCanvas extends Canvas {
 		g.fillRect(0, 0, getWidth(), getHeight());		
 		g.setColor(getForeground());
 		
-		paint(g);
+		paint(g,fps);
 		g.dispose();
 		strategy.show();
 	}
-	
+	private void drawText(Graphics g, String text) {
+		g.setColor(new Color(0, 245, 0));
+        g.setFont(new Font(Font.SANS_SERIF, 0, 40));
+        g.drawString("fps: " + text, getWidth() - getWidth()/2 - text.length()*30, getHeight()/10);
+	}
 	
 	
 	

@@ -1,4 +1,7 @@
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,11 +12,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class GameController extends MouseAdapter implements KeyListener{
-	
+	private long lastFps = System.currentTimeMillis();
 	private boolean firstMenu = true;
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	GameStatus gameStatus;
 	DrawingCanvas canvas;
+	int frames = 0;
+	int fps = 0;
 	private ArrayList<Integer> keysDown;
 	
 	GameController(GameStatus gameStatus){
@@ -56,9 +61,14 @@ public class GameController extends MouseAdapter implements KeyListener{
 				
 			}				
 			clear();
+			frames++;
+			if(lastFps+ 1000 < System.currentTimeMillis()) {
+				lastFps = System.currentTimeMillis();
+				fps = frames;
+				frames = 0;
+			}			
+			canvas.newFrame(fps);
 			
-			
-			canvas.newFrame();
 		}
 		  
 		
@@ -165,6 +175,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 		//System.out.println("released"+e.getKeyCode());
 		
 	}
+	
 		
 		
 	
