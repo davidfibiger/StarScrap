@@ -124,7 +124,7 @@ public class Player extends Drawable {
 				y -= calculateMovement(time, lastTimeForward, speed);
 				direction = 1;
 			}else if(keysDown.contains(leftwardsKey) || keysDown.contains(rightwardsKey)) {
-				y -= Math.sqrt(0.5 * calculateMovement(time, lastTimeForward, speed));	
+				y -= calculateMovement(time, lastTimeForward, speed) / Math.sqrt(2);	
 			}else {
 				y -= calculateMovement(time, lastTimeForward, speed);
 				direction = 1;
@@ -138,7 +138,7 @@ public class Player extends Drawable {
 				y += calculateMovement(time, lastTimeBackwards, speed);
 				direction = 5;
 			}else if(keysDown.contains(leftwardsKey) || keysDown.contains(rightwardsKey)) {
-				y += Math.sqrt(0.5 * calculateMovement(time, lastTimeBackwards, speed));
+				y += calculateMovement(time, lastTimeBackwards, speed) / Math.sqrt(2);
 			}else {
 				y += calculateMovement(time, lastTimeBackwards, speed);
 				direction = 5;
@@ -151,7 +151,7 @@ public class Player extends Drawable {
 				x -= calculateMovement(time, lastTimeLeftwards, speed);
 				direction = 7;
 			}else if(keysDown.contains(forwardKey) || keysDown.contains(backwardsKey)) {
-				x -= Math.sqrt(0.5 * calculateMovement(time, lastTimeLeftwards, speed));
+				x -= calculateMovement(time, lastTimeLeftwards, speed) / Math.sqrt(2);
 			}else {
 				x -= calculateMovement(time, lastTimeLeftwards, speed);
 				direction = 7;
@@ -164,7 +164,7 @@ public class Player extends Drawable {
 				x += calculateMovement(time, lastTimeRightwards, speed);	
 				direction = 3;
 			}else if(keysDown.contains(forwardKey) || keysDown.contains(backwardsKey)) {
-				x += Math.sqrt(0.5 * calculateMovement(time, lastTimeRightwards, speed));	
+				x += calculateMovement(time, lastTimeRightwards, speed) / Math.sqrt(2);	
 			}else{
 				x += calculateMovement(time, lastTimeRightwards, speed);
 				direction = 3;

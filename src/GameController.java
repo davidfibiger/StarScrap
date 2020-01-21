@@ -36,36 +36,36 @@ public class GameController extends MouseAdapter implements KeyListener{
 		this.canvas = canvas;
 
 		while(running) {
-			
-			for(Player player : gameStatus.players) {
-				player.movementListener(gameStatus, keysDown);
-				player.actions(keysDown, gameStatus);
-			}
-			for(Bullet bullet : gameStatus.bullets) {
-				bullet.checkJustification(gameStatus);
-				bullet.move();
-				for(Player player : gameStatus.players) { 
-					if((bullet.checkColision(bullet, player) || bullet.checkLaserHit(player)) && bullet.order != player.order && !gameStatus.usedLasers.contains(bullet) && !(player.starShip == null)) {						
-						if(!bullet.laser) {
-							gameStatus.junk.add(bullet);
-						}else {
-							gameStatus.usedLasers.add(bullet);
-						}
-						player.lives--;
-						//printLives(player);
-						if(player.lives <= 0) {
-							respawn(player);
-						}
-						
-					}
-						
-				}
-				
-			}				
-			clear();
-			
 			if(lastFrame + 3<System.currentTimeMillis()) {
 				lastFrame = System.currentTimeMillis();
+				for(Player player : gameStatus.players) {
+					player.movementListener(gameStatus, keysDown);
+					player.actions(keysDown, gameStatus);
+				}
+				for(Bullet bullet : gameStatus.bullets) {
+					bullet.checkJustification(gameStatus);
+					bullet.move();
+					for(Player player : gameStatus.players) { 
+						if((bullet.checkColision(bullet, player) || bullet.checkLaserHit(player)) && bullet.order != player.order && !gameStatus.usedLasers.contains(bullet) && !(player.starShip == null)) {						
+							if(!bullet.laser) {
+								gameStatus.junk.add(bullet);
+							}else {
+								gameStatus.usedLasers.add(bullet);
+							}
+							player.lives--;
+							//printLives(player);
+							if(player.lives <= 0) {
+								respawn(player);
+							}
+							
+						}
+							
+					}
+					
+				}				
+				clear();
+			
+			
 				
 				frames++;
 				if(lastFps+ 1000 < System.currentTimeMillis()) {
@@ -76,15 +76,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 				canvas.newFrame(fps);
 			}
 			
-			/*if(fps>200){
-				try {
 			
-					TimeUnit.MILLISECONDS.sleep(3);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}*/
 		}
 		  
 		
