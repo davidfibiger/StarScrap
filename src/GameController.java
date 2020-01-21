@@ -10,9 +10,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 public class GameController extends MouseAdapter implements KeyListener{
 	private long lastFps = System.currentTimeMillis();
+	private long lastFrame = System.currentTimeMillis();
 	private boolean firstMenu = true;
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	GameStatus gameStatus;
@@ -61,14 +63,28 @@ public class GameController extends MouseAdapter implements KeyListener{
 				
 			}				
 			clear();
-			frames++;
-			if(lastFps+ 1000 < System.currentTimeMillis()) {
-				lastFps = System.currentTimeMillis();
-				fps = frames;
-				frames = 0;
-			}			
-			canvas.newFrame(fps);
 			
+			if(lastFrame + 3<System.currentTimeMillis()) {
+				lastFrame = System.currentTimeMillis();
+				
+				frames++;
+				if(lastFps+ 1000 < System.currentTimeMillis()) {
+					lastFps = System.currentTimeMillis();
+					fps = frames;
+					frames = 0;					
+				}
+				canvas.newFrame(fps);
+			}
+			
+			/*if(fps>200){
+				try {
+			
+					TimeUnit.MILLISECONDS.sleep(3);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
 		}
 		  
 		
