@@ -64,7 +64,7 @@ public  class Drawable {
 			if((drawable1.y >= drawable2.y && drawable1.y <= drawable2.y + drawable2.height) || (drawable1.y + drawable1.height >= drawable2.y && drawable1.y + drawable1.height <= drawable2.y + drawable2.height)) 
 				colision = true;
 		}	
-		if(drawable1.x + drawable1.width >= drawable2.x && drawable1.x + drawable1.width < drawable2.y +drawable2.width) {
+		if(drawable1.x + drawable1.width >= drawable2.x && drawable1.x + drawable1.width < drawable2.x +drawable2.width) {
 			if((drawable1.y >= drawable2.y && drawable1.y <= drawable2.y + drawable2.height) || (drawable1.y + drawable1.height >= drawable2.y && drawable1.y + drawable1.height <= drawable2.y + drawable2.height))
 				colision = true;
 		}			
