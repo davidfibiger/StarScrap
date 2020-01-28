@@ -10,12 +10,9 @@ import javax.sound.sampled.Clip;
 public class Player extends Drawable {
 	
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	Image starShip;
-	public String shotSoundPath;
-	public Sound shotSound;
-	public String deathSpundPath;
-	public Sound deathSound;
-	public String laserSoundPath;
+	Image starShip;	
+	public Sound shotSound;	
+	public Sound deathSound;	
 	public Sound laserSound;
 	private int forwardKey;
 	private int backwardsKey;
@@ -36,18 +33,10 @@ public class Player extends Drawable {
 	public int lives = maxLives;
 	public int direction;
 	
-	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {
-		shotSoundPath = StarScrapMain.shotSoundPath;
-		shotSound = new Sound();
-		shotSound.setFile(shotSoundPath);
-		
-		deathSpundPath = StarScrapMain.deathSoundPath;
-		deathSound = new Sound();
-		deathSound.setFile(deathSpundPath);
-		
-		laserSoundPath = StarScrapMain.laserSoundPath;
-		laserSound = new Sound();
-		laserSound.setFile(laserSoundPath);
+	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {		
+		shotSound = new Sound(StarScrapMain.shotSoundPath);		
+		deathSound = new Sound(StarScrapMain.deathSoundPath);		
+		laserSound = new Sound(StarScrapMain.laserSoundPath);
 		
 		GameStatus.menu = true;
 		defaultSpeed = convert(1000d);

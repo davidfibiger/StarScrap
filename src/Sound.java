@@ -9,10 +9,9 @@ import javax.sound.sampled.LineListener;
 
 public class Sound {
 	String soundFileName;
-	
-	
-	public void setFile(String soundFileName) {
+	Sound(String soundFileName){
 		this.soundFileName = soundFileName;
+		
 	}
 	public void play() {
 		
