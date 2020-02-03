@@ -90,7 +90,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 	}
 	public void respawn(Player player) {
 		if(!gameStatus.activeMenuPlayers.contains(player)) {
-			player.getSoundFrom(player.deathSounds).play();
+			gameStatus.getSoundFrom(gameStatus.deathSounds).play();
 			gameStatus.activeMenuPlayers.add(player);
 			player.starShip = null;
 			gameStatus.menu = true;

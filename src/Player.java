@@ -11,9 +11,7 @@ public class Player extends Drawable {
 	
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	Image starShip;	
-	public ArrayList<Sound> shotSounds;
-	public ArrayList<Sound> deathSounds;
-	public ArrayList<Sound> laserSounds;
+	
 	private int forwardKey;
 	private int backwardsKey;
 	private int leftwardsKey;
@@ -34,12 +32,7 @@ public class Player extends Drawable {
 	public int direction;
 	
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {		
-		shotSounds = new ArrayList<Sound>();
-		deathSounds = new ArrayList<Sound>();
-		laserSounds = new ArrayList<Sound>();
-		addSounds(shotSounds, StarScrapMain.shotSoundPath);
-		addSounds(deathSounds, StarScrapMain.deathSoundPath);
-		addSounds(laserSounds, StarScrapMain.laserSoundPath);
+		
 		
 		GameStatus.menu = true;
 		defaultSpeed = convert(1000d);
@@ -58,11 +51,7 @@ public class Player extends Drawable {
 		
 	}
 
-	public void addSounds(ArrayList sounds, String path) {
-		for(int s = 20; s >= 0; s--) {
-			sounds.add(new Sound(path));
-		}
-	}
+	
 	
 	public void paint(Graphics g, GameStatus gameStatus) {
 		
@@ -229,33 +218,13 @@ public class Player extends Drawable {
 			Bullet laser = new Bullet(x, y, direction, order, starShip, true && starShip!=null);
 			gameStatus.bullets.add(laser);
 			gameStatus.drawables.add(laser);
-			getSoundFrom(laserSounds).play();
+			gameStatus.getSoundFrom(gameStatus.laserSounds).play();
 			lastLaser = time;
 				
 		}
 	}
 
-	Sound getSoundFrom(ArrayList<Sound> sounds) {
-		Sound soundMax = null;
-		int max = 0;
-		for(Sound sound : sounds) {	
-			
-			
-			if(max < sound.clip.getFramePosition()) { 
-				max = sound.clip.getFramePosition();
-				soundMax = sound;
-			}
-			if(sound.clip.getFramePosition() == 0) {
-				return sound;			
-			}
-		}
-		System.out.println("\n"+soundMax.clip.getFramePosition()+"\n"+max);
-		for(Sound s : sounds) {
-			System.out.print(" "+s.clip.getFramePosition());
-		}
-		return soundMax;
-		
-	}
+	
 
 	private void shoot(GameStatus gameStatus,double x , double y){
 		
@@ -264,7 +233,7 @@ public class Player extends Drawable {
 		if(lastShot < time - 1  && !shooted && starShip!=null) {
 			Bullet bullet = new Bullet(x,y, direction, order, starShip, false);
 			gameStatus.bullets.add(bullet);
-			getSoundFrom(shotSounds).play();
+			gameStatus.getSoundFrom(gameStatus.shotSounds).play();
 			gameStatus.drawables.add(bullet);
 			//System.out.println("boom");
 			lastShot = time;
