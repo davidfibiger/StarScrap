@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -11,7 +12,8 @@ public class Player extends Drawable {
 	
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	Image starShip;	
-	
+	private long lastEnergyUpdate = System.currentTimeMillis();
+	private int shotCost = 15;
 	private int forwardKey;
 	private int backwardsKey;
 	private int leftwardsKey;
@@ -73,12 +75,44 @@ public class Player extends Drawable {
 	    }
 		g.drawImage(starShip, (int)x, (int)y, (int)width, (int)height, null);
 		drawHpBar(g, gameStatus);
+		drawEnergyBar(g, gameStatus);
 		
 		
 	}
 	
+	private void drawEnergyBar(Graphics g, GameStatus gameStatus) {
+		//g.setColor(Color.WHITE);
+		setColor(g, starShip);
+		int x = gameStatus.getCanvas().getWidth()/32;	
+		int y = gameStatus.getCanvas().getHeight()/27;
+		int width = x * 8;
+		int height = y / 6;
+		if(order == 1) {
+			g.drawRect(x, y, width, height);
+			drawEnergy(g, gameStatus, x, y, width, height);
+		}else {
+			x = gameStatus.getCanvas().getWidth() - x * 9;
+			g.drawRect(x, y, width, height);
+			drawEnergy(g, gameStatus, x, y, width, height);
+		}
+	}
+	
+	private void drawEnergy(Graphics g, GameStatus gameStatus, int x, int y, int width, int height) {
+		setColor(g, starShip);
+		if(energy>0) {
+			if(order == 1) {				
+				g.fillRect(x + 2, y + 2, (int)(((double)width / (double)maxEnergy) * energy) - 4, height - 4);
+			}else {
+				g.fillRect(x + 2 + width - (int)(((double)width / (double)maxEnergy) * energy), y + 2, (int)(((double)width / (double)maxEnergy) * energy) - 4, height - 4);
+			}
+		}
+	}
+
+
+
 	private void drawHpBar(Graphics g, GameStatus gameStatus) {
-		setColor(g, starShip);	
+		//g.setColor(Color.WHITE);
+		setColor(g, starShip);
 		int x = gameStatus.getCanvas().getWidth()/32;	
 		int y = gameStatus.getCanvas().getHeight()/18;
 		int width = x * 4;
@@ -86,21 +120,28 @@ public class Player extends Drawable {
 		if(order == 1) {
 			x = gameStatus.getCanvas().getWidth()/32;			
 			g.drawRect(x,y,width, height);		
-			printHP(g, gameStatus, x, y, width, height);
+			drawHp(g, gameStatus, x, y, width, height);
 		}else {
 			x = gameStatus.getCanvas().getWidth() - x * 5;
 			g.drawRect(x,y,width , height);
-			printHP(g, gameStatus, x, y, width, height);
+			drawHp(g, gameStatus, x, y, width, height);
 		}
 		
 	
 		
 	}
 
-	public void printHP(Graphics g, GameStatus gameStatus, int x, int y, int width, int height) {
+	public void drawHp(Graphics g, GameStatus gameStatus, int x, int y, int width, int height) {
+		setColor(g, starShip);
 		if(lives>0) {
-			for(int helthBar = 0; helthBar < lives; helthBar++) {
-				g.fillRect(x + width/maxLives * helthBar + 3, y + 3, width/maxLives - 6, height - 6);
+			if(order == 1) {
+				for(int helthBar = 0; helthBar < lives; helthBar++) {
+					g.fillRect(x + width/maxLives * helthBar + 3, y + 3, width/maxLives - 6, height - 6);
+				}
+			}else {
+				for(int helthBar = 1; helthBar <= lives; helthBar++) {
+					g.fillRect(x + width - width/maxLives * helthBar + 3, y + 3, width/maxLives - 6, height - 6);
+				}
 			}
 		}
 	}
@@ -161,10 +202,9 @@ public class Player extends Drawable {
 		}
 		lastTimeRightwards = getLastTime(time,lastTimeRightwards, rightwardsKey,(gameStatus.getCanvas().getWidth() - width) - x, keysDown);
 		
-		if(keysDown.contains(boostKey)) {
+		if(keysDown.contains(boostKey) && energy >= 1) {
 			if(speed == defaultSpeed) {
-				speed += boost;
-				
+				speed += boost;				
 			}			
 		}else {
 			if(speed == defaultSpeed + boost){
@@ -218,13 +258,13 @@ public class Player extends Drawable {
 	private void laser(GameStatus gameStatus, double x , double y) {
 		long time = System.currentTimeMillis();
 		
-		if(lastLaser < time - 300  && shooted && lastLaser != 0) {
+		if(lastLaser < time - 300  && shooted && lastLaser != 0 && energy >= shotCost) {
 			Bullet laser = new Bullet(x, y, direction, order, starShip, true && starShip!=null);
 			gameStatus.bullets.add(laser);
 			gameStatus.drawables.add(laser);
 			gameStatus.getSoundFrom(gameStatus.laserSounds).play();
 			lastLaser = time;
-				
+			energy = energy - shotCost;	
 		}
 	}
 
@@ -234,7 +274,7 @@ public class Player extends Drawable {
 		
 		long time = System.currentTimeMillis();
 		
-		if(lastShot < time - 1  && !shooted && starShip!=null) {
+		if(lastShot < time - 1  && !shooted && starShip!=null && energy >= shotCost) {
 			Bullet bullet = new Bullet(x,y, direction, order, starShip, false);
 			gameStatus.bullets.add(bullet);
 			gameStatus.getSoundFrom(gameStatus.shotSounds).play();
@@ -243,8 +283,22 @@ public class Player extends Drawable {
 			lastShot = time;
 			shooted = true;
 			lastLaser = time;
+			energy = energy - shotCost;
 		}
 		
+	}
+	public void energyUpdate() {
+		if(System.currentTimeMillis() >= lastEnergyUpdate + 25) {
+			if(energy < maxEnergy && speed != defaultSpeed + boost)
+				energy++;
+			
+			if(speed == defaultSpeed + boost) {
+				energy = energy - 1;				
+			}
+			
+			System.out.println(order + " " + energy);
+			lastEnergyUpdate = System.currentTimeMillis();			
+		}
 	}
 
 }

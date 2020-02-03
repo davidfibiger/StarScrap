@@ -41,6 +41,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 				for(Player player : gameStatus.players) {
 					player.movementListener(gameStatus, keysDown);
 					player.actions(keysDown, gameStatus);
+					player.energyUpdate();
 				}
 				for(Bullet bullet : gameStatus.bullets) {
 					bullet.checkJustification(gameStatus);
