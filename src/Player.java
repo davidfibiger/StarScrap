@@ -29,6 +29,8 @@ public class Player extends Drawable {
 	public int order;	
 	public final int maxLives = 6;
 	public int lives = maxLives;
+	public final int maxEnergy = 100;
+	public int energy = maxEnergy;
 	public int direction;
 	
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {		
@@ -164,8 +166,10 @@ public class Player extends Drawable {
 				speed += boost;
 				
 			}			
-		}else if(speed == defaultSpeed + boost){
-			speed = defaultSpeed;
+		}else {
+			if(speed == defaultSpeed + boost){
+				speed = defaultSpeed;
+			}
 			
 		}
 		

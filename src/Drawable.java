@@ -9,6 +9,9 @@ public  class Drawable {
 	double boost;
 	double x;
 	double y;	
+	double width;
+	double height;
+	
 	public double getWidth() {
 		return width;
 	}
@@ -21,8 +24,7 @@ public  class Drawable {
 	public void setHeight(double height) {
 		this.height = height;
 	}
-	double width;
-	double height;
+	
 	public double getSpeed() {
 		return speed;
 	}
