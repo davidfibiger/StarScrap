@@ -39,6 +39,9 @@ public class GameController extends MouseAdapter implements KeyListener{
 		while(running) {
 			if(lastFrame + 3 < System.currentTimeMillis()) {
 				lastFrame = System.currentTimeMillis();
+				if(keysDown.contains(KeyEvent.VK_ESCAPE)) {
+					System.exit(0);
+				}
 				if(lastStar + 80 < System.currentTimeMillis()) {
 					lastStar = System.currentTimeMillis();
 					Star star = new Star();

@@ -14,7 +14,8 @@ public class StarScrapMain {
 	static String laserSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\laser.wav";
 	public static void main(String[] args) {
 		JFrame  f = new JFrame();		
-		f.setExtendedState(Frame.MAXIMIZED_BOTH);
+		f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		f.setUndecorated(true);
 		f.setLayout(null);
 		ProgrammeKiller pk = new ProgrammeKiller();
 		f.addWindowListener(pk);
