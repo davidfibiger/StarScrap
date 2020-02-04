@@ -11,6 +11,7 @@ public class GameStatus {
 	ArrayList<Bullet> bullets;
 	ArrayList<Bullet> usedLasers;
 	public ArrayList<Star> stars;
+	public ArrayList<Spark> sparks;
 	public ArrayList<Sound> shotSounds;
 	public ArrayList<Sound> deathSounds;
 	public ArrayList<Sound> laserSounds;
@@ -34,6 +35,7 @@ public class GameStatus {
 		usedLasers = new ArrayList();
 		activeMenuPlayers = new ArrayList();
 		stars = new ArrayList();
+		sparks = new ArrayList();
 		player1 = new Player(1, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SHIFT, KeyEvent.VK_SPACE, KeyEvent.VK_1);
 		player2 = new Player(2, 91, 222, 59, 92, 44, 17,KeyEvent.VK_2);
 		//player3 = new Player(3, 101, 98, 97, 99, 96, 10,KeyEvent.VK_3);

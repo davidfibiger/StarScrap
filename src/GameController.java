@@ -51,6 +51,9 @@ public class GameController extends MouseAdapter implements KeyListener{
 				for(Star star : gameStatus.stars) {
 					star.update();
 				}
+				for(Spark spark : gameStatus.sparks) {
+					spark.update();
+				}
 				for(Player player : gameStatus.players) {
 					player.movementListener(gameStatus, keysDown);
 					player.actions(keysDown, gameStatus);
@@ -104,6 +107,11 @@ public class GameController extends MouseAdapter implements KeyListener{
 	}
 	public void respawn(Player player) {
 		if(!gameStatus.activeMenuPlayers.contains(player)) {
+			for(int a = 0; a < 100; a++) {
+				Spark spark = new Spark((int)(player.x + player.width/2), (int)(player.y + player.height/2));
+				gameStatus.sparks.add(spark);
+				gameStatus.drawables.add(spark);
+			}
 			gameStatus.getSoundFrom(gameStatus.deathSounds).play();
 			gameStatus.activeMenuPlayers.add(player);
 			player.starShip = null;
