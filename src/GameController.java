@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class GameController extends MouseAdapter implements KeyListener{
 	private long lastFps = System.currentTimeMillis();
 	private long lastFrame = System.currentTimeMillis();
+	private long lastStar = System.currentTimeMillis();
 	private boolean firstMenu = true;
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	GameStatus gameStatus;
@@ -36,8 +37,17 @@ public class GameController extends MouseAdapter implements KeyListener{
 		this.canvas = canvas;
 
 		while(running) {
-			if(lastFrame + 3<System.currentTimeMillis()) {
+			if(lastFrame + 3 < System.currentTimeMillis()) {
 				lastFrame = System.currentTimeMillis();
+				if(lastStar + 80 < System.currentTimeMillis()) {
+					lastStar = System.currentTimeMillis();
+					Star star = new Star();
+					gameStatus.stars.add(star);
+					gameStatus.drawables.add(star);
+				}
+				for(Star star : gameStatus.stars) {
+					star.update();
+				}
 				for(Player player : gameStatus.players) {
 					player.movementListener(gameStatus, keysDown);
 					player.actions(keysDown, gameStatus);

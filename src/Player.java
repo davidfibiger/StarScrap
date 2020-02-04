@@ -295,8 +295,6 @@ public class Player extends Drawable {
 			if(speed == defaultSpeed + boost) {
 				energy = energy - 1;				
 			}
-			
-			System.out.println(order + " " + energy);
 			lastEnergyUpdate = System.currentTimeMillis();			
 		}
 	}
