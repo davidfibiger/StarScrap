@@ -9,9 +9,9 @@ public class StarScrapMain {
 	static Image starShip1;
 	static Image starShip2;
 	static Image starShip3;
-	static String shotSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\pew.wav";
-	static String deathSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\death.wav";
-	static String laserSoundPath = "d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\Sounds\\laser.wav";
+	static String shotSoundPath = "Sounds\\pew.wav";
+	static String deathSoundPath = "Sounds\\death.wav";
+	static String laserSoundPath = "Sounds\\laser.wav";
 	public static void main(String[] args) {
 		JFrame  f = new JFrame();		
 		f.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -26,9 +26,9 @@ public class StarScrapMain {
 		gameStatus.setCanvas(canvas);
 		
 		try {
-            starShip1 = ImageIO.read(new File("d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\textures\\starShip1.png"));
-            starShip2 = ImageIO.read(new File("d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\textures\\starShip2.png"));
-            starShip3 = ImageIO.read(new File("d:\\david\\programovani\\Eclipse\\eclipse\\workSpace\\StarScrap\\textures\\starShip3.png"));
+            starShip1 = ImageIO.read(new File("textures\\starShip1.png"));
+            starShip2 = ImageIO.read(new File("textures\\starShip2.png"));
+            starShip3 = ImageIO.read(new File("textures\\starShip3.png"));
             
         }catch( java.io.IOException e){
             System.out.println(e.getMessage());

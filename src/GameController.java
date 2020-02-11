@@ -38,6 +38,9 @@ public class GameController extends MouseAdapter implements KeyListener{
 
 		while(running) {
 			if(lastFrame + 3 < System.currentTimeMillis()) {
+				/*for(Integer k : keysDown) {
+					System.out.println(k);
+				}*/
 				lastFrame = System.currentTimeMillis();
 				if(keysDown.contains(KeyEvent.VK_ESCAPE)) {
 					System.exit(0);

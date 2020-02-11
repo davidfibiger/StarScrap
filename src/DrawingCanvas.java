@@ -37,7 +37,7 @@ public class DrawingCanvas extends Canvas {
         for(int i = 0; i < StarScrapMain.gameStatus.drawables.size(); i++) {
         	Drawable drawable = StarScrapMain.gameStatus.drawables.get(i);
         	drawable.paint(g, StarScrapMain.gameStatus);
-        	
+        	 
         }
         drawText(g, String.valueOf(fps));
 	}
