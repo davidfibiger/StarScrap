@@ -16,11 +16,11 @@ public class Bullet extends Drawable {
 		speed = convert((double)((double)StarScrapMain.canvas.getWidth() / (double)1.536));
 		this.direction = direction;
 		if(direction == 3 || direction == 7) {
-			height = (double)((double)StarScrapMain.canvas.getWidth() / (double)768);
-			width = (double)((double)StarScrapMain.canvas.getWidth() / (double)192);
+			height = (double)((double)StarScrapMain.canvas.getWidth() / (double)700);
+			width = (double)((double)StarScrapMain.canvas.getWidth() / (double)150);
 		}else {
-			height = (double)((double)StarScrapMain.canvas.getWidth() / (double)192);
-			width = (double)((double)StarScrapMain.canvas.getWidth() / (double)768);
+			height = (double)((double)StarScrapMain.canvas.getWidth() / (double)150);
+			width = (double)((double)StarScrapMain.canvas.getWidth() / (double)700);
 		}
 		this.x = x;
 		this.y = y;

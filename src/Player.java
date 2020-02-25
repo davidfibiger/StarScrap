@@ -41,7 +41,7 @@ public class Player extends Drawable {
 		GameStatus.menu = true;
 		defaultSpeed = convert((double)((double)StarScrapMain.canvas.getWidth() / (double)3.84));
 		//width = 80;
-		width = StarScrapMain.canvas.getWidth()/48;
+		width = StarScrapMain.canvas.getWidth()/40;
 		height = width;
 		speed = defaultSpeed;
 		boost = defaultSpeed;
