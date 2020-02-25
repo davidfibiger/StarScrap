@@ -56,8 +56,8 @@ public class DrawingCanvas extends Canvas {
 	}
 	private void drawText(Graphics g, String text) {
 		g.setColor(new Color(0, 245, 0));
-        g.setFont(new Font(Font.SANS_SERIF, 0, 40));
-        g.drawString("fps: " + text, getWidth() - getWidth()/2 - text.length()*30, getHeight()/10);
+        g.setFont(new Font(Font.SANS_SERIF, 0, (getWidth()/80)));
+        g.drawString("fps: " + text, getWidth() - getWidth()/2 - text.length()*(getWidth()/128), getHeight()/10);
 	}
 	
 	

@@ -39,11 +39,12 @@ public class Player extends Drawable {
 		
 		
 		GameStatus.menu = true;
-		defaultSpeed = convert(1000d);
-		width = 80;
-		height = 80;
+		defaultSpeed = convert((double)((double)StarScrapMain.canvas.getWidth() / (double)3.84));
+		//width = 80;
+		width = StarScrapMain.canvas.getWidth()/48;
+		height = width;
 		speed = defaultSpeed;
-		boost = convert(1000d);
+		boost = defaultSpeed;
 		this.forwardKey = forwardKey;
 		this.backwardsKey = backwardsKey;
 		this.leftwardsKey = leftwardsKey;

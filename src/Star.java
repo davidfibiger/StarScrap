@@ -4,10 +4,10 @@ import java.awt.Graphics;
 public class Star extends Drawable {
 	long lastTime;
 	public Star() {
-		speed = convert((double)(Math.random()*2000));
+		speed = convert((double)(Math.random()*(StarScrapMain.gameStatus.getCanvas().getWidth()/1.92)));
 		x = Math.random() * StarScrapMain.gameStatus.getCanvas().getWidth();
 		y = -100;
-		width = Math.random() * 8;
+		width = Math.random() * (StarScrapMain.gameStatus.getCanvas().getWidth()/300);
 		height = width;
 		//System.out.println("pada hvezda neco si prej");
 	}

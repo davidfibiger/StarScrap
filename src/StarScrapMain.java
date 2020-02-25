@@ -12,6 +12,7 @@ public class StarScrapMain {
 	static String shotSoundPath = "Sounds\\pew.wav";
 	static String deathSoundPath = "Sounds\\death.wav";
 	static String laserSoundPath = "Sounds\\laser.wav";
+	static DrawingCanvas canvas;
 	public static void main(String[] args) {
 		JFrame  f = new JFrame();		
 		f.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -19,9 +20,10 @@ public class StarScrapMain {
 		f.setLayout(null);
 		ProgrammeKiller pk = new ProgrammeKiller();
 		f.addWindowListener(pk);
-		gameStatus = new GameStatus();
 		f.setVisible(true);
-		DrawingCanvas canvas = new DrawingCanvas(f);
+		canvas = new DrawingCanvas(f);
+		gameStatus = new GameStatus();
+		
 		f.add(canvas);
 		gameStatus.setCanvas(canvas);
 		

@@ -13,14 +13,14 @@ public class Bullet extends Drawable {
 	private long bornTime;
 	
 	public Bullet(double x, double y, int direction, int order, Image starShip, boolean laser) {		
-		speed = convert(2500d);
+		speed = convert((double)((double)StarScrapMain.canvas.getWidth() / (double)1.536));
 		this.direction = direction;
 		if(direction == 3 || direction == 7) {
-			height = 5;
-			width = 20;
+			height = (double)((double)StarScrapMain.canvas.getWidth() / (double)768);
+			width = (double)((double)StarScrapMain.canvas.getWidth() / (double)192);
 		}else {
-			height = 20;
-			width = 5;
+			height = (double)((double)StarScrapMain.canvas.getWidth() / (double)192);
+			width = (double)((double)StarScrapMain.canvas.getWidth() / (double)768);
 		}
 		this.x = x;
 		this.y = y;

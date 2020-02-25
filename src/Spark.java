@@ -9,11 +9,11 @@ public class Spark extends Drawable{
 	private int angle;
 	
 	public Spark(int x, int y){
-		width = Math.random() * 8;
+		width = Math.random() * ( StarScrapMain.gameStatus.getCanvas().getWidth()/300);
 		height = width;
 		angle = (int) (Math.random()*360); 
-		speedX = convert(380 + (Math.random()*1000));
-		speedY = convert(380 + (Math.random()*1000));
+		speedX = convert(380 + (Math.random()*(StarScrapMain.gameStatus.getCanvas().getWidth()/3.48)));
+		speedY = convert(380 + (Math.random()*(StarScrapMain.gameStatus.getCanvas().getWidth()/3.48)));
 		direction = Math.random()*4;
 		this.x = x;
 		this.y = y;
