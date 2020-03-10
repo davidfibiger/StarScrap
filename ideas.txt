@@ -1,0 +1,11 @@
+odhození/výbuch při zásahu
+skóre
+sprite 2.hráče a střel/laserů je nad UI
+zvětšit bar na zrychlení
+zachování momentu/driftování
+penalizace za úplné vyčerpání boostu
+přidat oheň při boostování
+otáčení spritů (při střílení do stran a dolů)
+(náhodná) spawnovací místa pro hráče (třeba hráč 1 kdekoliv vlevo a 2 kdekoliv vpravo)
+(hlavní obrazovka s logem, kde by se dalo najít i ovládání)
+asteroidy (do kterých jde vrazit)

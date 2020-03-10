@@ -15,9 +15,10 @@ public class GameStatus {
 	public ArrayList<Sound> shotSounds;
 	public ArrayList<Sound> deathSounds;
 	public ArrayList<Sound> laserSounds;
-	static boolean menu = false;
+	static boolean skinPick = false;
+	static boolean menu = true;
 	//Player activeMenuPlayer;
-	ArrayList<Player> activeMenuPlayers;
+	ArrayList<Player> activeSkinPickPlayers;
 	Player player1;
 	Player player2;
 	//Player player3;
@@ -33,23 +34,28 @@ public class GameStatus {
 		junk = new ArrayList();
 		bullets = new ArrayList();
 		usedLasers = new ArrayList();
-		activeMenuPlayers = new ArrayList();
+		activeSkinPickPlayers = new ArrayList();
 		stars = new ArrayList();
 		sparks = new ArrayList();
-		player1 = new Player(1, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SHIFT, KeyEvent.VK_SPACE, KeyEvent.VK_1);
-		player2 = new Player(2, KeyEvent.VK_I, KeyEvent.VK_K, KeyEvent.VK_J, KeyEvent.VK_L, KeyEvent.VK_B,KeyEvent.VK_ENTER,KeyEvent.VK_2);
+		
 		//player3 = new Player(3, 101, 98, 97, 99, 96, 10,KeyEvent.VK_3);
 		//activeMenuPlayer = player1;
-		activeMenuPlayers.add(player1);
-		activeMenuPlayers.add(player2);
+		/*
+		activeSkinPickPlayers.add(player1);
+		activeSkinPickPlayers.add(player2);
 		drawables.add(player1);
 		drawables.add(player2);
 		//drawables.add(player3);
 		players.add(player1);
 		players.add(player2);
 		//players.add(player3);
+		*/
 		
-		
+	}
+	public void addPlayer(Player player) {
+		activeSkinPickPlayers.add(player);
+		drawables.add(player);
+		players.add(player);
 	}
 	public DrawingCanvas getCanvas() {
 		return canvas;

@@ -38,11 +38,13 @@ public class Player extends Drawable {
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {		
 		
 		
-		GameStatus.menu = true;
+
+		GameStatus.skinPick = true;
 		defaultSpeed = convert((double)((double)StarScrapMain.canvas.getWidth() / (double)3.84));
 		//width = 80;
 		width = StarScrapMain.canvas.getWidth()/40;
 		height = width;
+
 		speed = defaultSpeed;
 		boost = defaultSpeed;
 		this.forwardKey = forwardKey;
@@ -60,7 +62,7 @@ public class Player extends Drawable {
 	
 	public void paint(Graphics g, GameStatus gameStatus) {
 		
-		 if(gameStatus.menu) {
+		 if(gameStatus.skinPick) {
 	        	int x = (int)gameStatus.getCanvas().getWidth()/7;	    		
 	    		final int width = x;
 	    		
@@ -218,9 +220,9 @@ public class Player extends Drawable {
 	
 	
 	void actions(ArrayList<Integer>  keysDown, GameStatus gameStatus) {
-		if(keysDown.contains(skinKey) && !gameStatus.menu) {
-			gameStatus.activeMenuPlayers.add(this);
-			gameStatus.menu = true;
+		if(keysDown.contains(skinKey) && !gameStatus.skinPick) {
+			gameStatus.activeSkinPickPlayers.add(this);
+			gameStatus.skinPick = true;
 			
 		}
 		if(keysDown.contains(shootingKey) && starShip!=null) {			

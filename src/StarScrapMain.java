@@ -9,6 +9,8 @@ public class StarScrapMain {
 	static Image starShip1;
 	static Image starShip2;
 	static Image starShip3;
+	static Image logo;
+	static Image oneVOne;
 	static String shotSoundPath = "Sounds\\pew.wav";
 	static String deathSoundPath = "Sounds\\death.wav";
 	static String laserSoundPath = "Sounds\\laser.wav";
@@ -31,6 +33,8 @@ public class StarScrapMain {
             starShip1 = ImageIO.read(new File("textures\\starShip1.png"));
             starShip2 = ImageIO.read(new File("textures\\starShip2.png"));
             starShip3 = ImageIO.read(new File("textures\\starShip3.png"));
+            logo = ImageIO.read(new File("textures\\logo10.png"));
+            oneVOne = ImageIO.read(new File("textures\\1v1.png"));
             
         }catch( java.io.IOException e){
             System.out.println(e.getMessage());
