@@ -61,8 +61,8 @@ public class Player extends Drawable {
 	
 	
 	public void paint(Graphics g, GameStatus gameStatus) {
-		
-		 if(gameStatus.skinPick) {
+		g.drawImage(starShip, (int)x, (int)y, (int)width, (int)height, null);
+		if(gameStatus.skinPick) {
 	        	int x = (int)gameStatus.getCanvas().getWidth()/7;	    		
 	    		final int width = x;
 	    		
@@ -76,7 +76,7 @@ public class Player extends Drawable {
 	    		g.drawImage(StarScrapMain.starShip3, x * 5, y, width, height, null);
 	    		 	
 	    }
-		g.drawImage(starShip, (int)x, (int)y, (int)width, (int)height, null);
+		
 		drawHpBar(g, gameStatus);
 		drawEnergyBar(g, gameStatus);
 		

@@ -33,7 +33,7 @@ public class StarScrapMain {
             starShip1 = ImageIO.read(new File("textures\\starShip1.png"));
             starShip2 = ImageIO.read(new File("textures\\starShip2.png"));
             starShip3 = ImageIO.read(new File("textures\\starShip3.png"));
-            logo = ImageIO.read(new File("textures\\logo10.png"));
+            logo = ImageIO.read(new File("textures\\logo20.png"));
             oneVOne = ImageIO.read(new File("textures\\1v1.png"));
             
         }catch( java.io.IOException e){

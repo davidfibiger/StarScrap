@@ -167,7 +167,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 		int x = (int)canvas.getWidth()/5;
 		int y = (int)canvas.getHeight()/5;
 		if(e.getY() > y*3 && e.getY() < (y*4)){
-			if(e.getX() > x && e.getX() < x*2) {
+			if(e.getX() > x*2 && e.getX() < x*3) {
 				gameStatus.menu = false;
 			}
 		}
