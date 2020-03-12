@@ -5,16 +5,14 @@ public class Spark extends Drawable{
 	private double speedX;
 	private double speedY;
 	private long lastTime;
-	private double direction;
-	private int angle;
+	private int direction;
 	
 	public Spark(int x, int y){
 		width = Math.random() * ( StarScrapMain.gameStatus.getCanvas().getWidth()/300);
 		height = width;
-		angle = (int) (Math.random()*360); 
+		direction = (int) (Math.random()*360); 
 		speedX = convert(380 + (Math.random()*(StarScrapMain.gameStatus.getCanvas().getWidth()/3.48)));
 		speedY = convert(380 + (Math.random()*(StarScrapMain.gameStatus.getCanvas().getWidth()/3.48)));
-		direction = Math.random()*4;
 		this.x = x;
 		this.y = y;
 	}
@@ -22,8 +20,8 @@ public class Spark extends Drawable{
 		long time = System.currentTimeMillis();
 		
 		if(lastTime > 0) {
-			x += Math.sin(angle) * calculateMovement(time, lastTime, speedX);
-			y += Math.cos(angle) * calculateMovement(time, lastTime, speedY);
+			x += Math.sin(direction) * calculateMovement(time, lastTime, speedX);
+			y += Math.cos(direction) * calculateMovement(time, lastTime, speedY);
 		}
 		lastTime = time;
 		

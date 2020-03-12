@@ -60,17 +60,27 @@ public  class Drawable {
 		}
 		return lastTime;
 	}
-	public boolean checkColision(Drawable drawable1, Drawable drawable2) {
+	public boolean checkColisionInternal(Drawable drawable1, Drawable drawable2) {
 		boolean colision = false;
 		if(drawable1.x >= drawable2.x && drawable1.x <= drawable2.x + drawable2.width) {
-			if((drawable1.y >= drawable2.y && drawable1.y <= drawable2.y + drawable2.height) || (drawable1.y + drawable1.height >= drawable2.y && drawable1.y + drawable1.height <= drawable2.y + drawable2.height)) 
+			if((drawable1.y >= drawable2.y && drawable1.y <= drawable2.y + drawable2.height) || (drawable1.y + drawable1.height >= drawable2.y && drawable1.y + drawable1.height <= drawable2.y + drawable2.height)) {
 				colision = true;
+				//System.out.println("colizion");
+			}
 		}	
 		if(drawable1.x + drawable1.width >= drawable2.x && drawable1.x + drawable1.width < drawable2.x +drawable2.width) {
-			if((drawable1.y >= drawable2.y && drawable1.y <= drawable2.y + drawable2.height) || (drawable1.y + drawable1.height >= drawable2.y && drawable1.y + drawable1.height <= drawable2.y + drawable2.height))
+			if((drawable1.y >= drawable2.y && drawable1.y <= drawable2.y + drawable2.height) || (drawable1.y + drawable1.height >= drawable2.y && drawable1.y + drawable1.height <= drawable2.y + drawable2.height)){
 				colision = true;
-		}			
+				//System.out.println("colizion");
+			}
+		}
+		
 		return colision;
+	}
+	public boolean checkColision(Drawable drawable1, Drawable drawable2) {
+		
+		return checkColisionInternal(drawable1, drawable2) || checkColisionInternal(drawable2, drawable1);
+		
 	}
 	public void setColor(Graphics g, Image starShip) {
 		g.setColor(Color.WHITE);

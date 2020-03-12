@@ -10,6 +10,7 @@ public class GameStatus {
 	ArrayList<Drawable> junk;
 	ArrayList<Bullet> bullets;
 	ArrayList<Bullet> usedLasers;
+	ArrayList<Meteorite> meteorites;
 	public ArrayList<Star> stars;
 	public ArrayList<Spark> sparks;
 	public ArrayList<Sound> shotSounds;
@@ -26,6 +27,7 @@ public class GameStatus {
 		shotSounds = new ArrayList<Sound>();
 		deathSounds = new ArrayList<Sound>();
 		laserSounds = new ArrayList<Sound>();
+		meteorites = new ArrayList<Meteorite>();
 		addSounds(shotSounds, StarScrapMain.shotSoundPath);
 		addSounds(deathSounds, StarScrapMain.deathSoundPath);
 		addSounds(laserSounds, StarScrapMain.laserSoundPath);

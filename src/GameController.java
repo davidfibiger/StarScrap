@@ -16,6 +16,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 	private long lastFps = System.currentTimeMillis();
 	private long lastFrame = System.currentTimeMillis();
 	private long lastStar = System.currentTimeMillis();
+	private long lastMeteorite = System.currentTimeMillis();
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	GameStatus gameStatus;
 	DrawingCanvas canvas;
@@ -49,7 +50,14 @@ public class GameController extends MouseAdapter implements KeyListener{
 				starsManagement();
 				sparksManegement();
 				playersManagement();
-				bulletsManagement();				
+				bulletsManagement();	
+				if(!gameStatus.menu) {
+					meteoriteManagement();
+				}else {
+					for(Meteorite meteorite : gameStatus.meteorites) {
+						gameStatus.junk.add(meteorite);
+					}
+				}
 				clear();
 			
 			
@@ -67,6 +75,40 @@ public class GameController extends MouseAdapter implements KeyListener{
 		}
 		  
 		
+	}
+	private void meteoriteManagement() {		
+		if(lastMeteorite + 100 < System.currentTimeMillis() && !gameStatus.skinPick) {
+			createMeteorite();
+			lastMeteorite = System.currentTimeMillis();
+		}
+		for(Meteorite meteorite : gameStatus.meteorites) {
+			meteorite.update();
+			for(Player player : gameStatus.players) {
+				if(meteorite.checkColision(meteorite, player)){
+					gameStatus.junk.add(meteorite);
+					
+					player.lives--;
+					if(player.lives <= 0) {
+						respawn(player);
+					}
+				}
+			}
+			for(Bullet bullet : gameStatus.bullets) {
+				if((meteorite.checkColision(meteorite, bullet)||bullet.checkLaserHit(meteorite))&& !gameStatus.usedLasers.contains(bullet)){
+					gameStatus.junk.add(meteorite);
+					if(!bullet.laser) {
+						gameStatus.junk.add(bullet);
+					}else {
+						gameStatus.usedLasers.add(bullet);
+					}
+				}
+			}
+		}
+		
+	}
+	public void createMeteorite() {
+		Meteorite m = new Meteorite();
+		gameStatus.meteorites.add(m);
 	}
 	public void createPlayers() {
 		gameStatus.player1 = new Player(1, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SHIFT, KeyEvent.VK_SPACE, KeyEvent.VK_1);
@@ -151,6 +193,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 			
 			gameStatus.bullets.remove(drawable);
 			gameStatus.drawables.remove(drawable);
+			gameStatus.meteorites.remove(drawable);
 		}
 		gameStatus.junk.clear();
 	}

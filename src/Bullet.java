@@ -4,8 +4,8 @@ import java.awt.Image;
 
 public class Bullet extends Drawable {
 	private long lastTime;
-	public double height;
-	public double width;
+	//public double height;
+	//public double width;
 	private int direction;
 	public int order;
 	private Image starShip;
