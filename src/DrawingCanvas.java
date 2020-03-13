@@ -39,7 +39,7 @@ public class DrawingCanvas extends Canvas {
         	drawable.paint(g, StarScrapMain.gameStatus);
         	 
         }
-        //drawText(g, String.valueOf(fps));
+        drawText(g, String.valueOf(fps));
         if(GameStatus.menu) {
         	g.drawImage(StarScrapMain.logo, (int)getWidth()/8, -(int)getHeight()/8, (int)((getWidth()/4)*3), (int)((getHeight()/4)*3), null);
         	g.drawImage(StarScrapMain.oneVOne, (int)(getWidth()/5*2), (int)getHeight()/5*3, (int)(getWidth()/5), (int)(getHeight()/5), null);

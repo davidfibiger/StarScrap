@@ -34,6 +34,7 @@ public class Player extends Drawable {
 	public final int maxEnergy = 100;
 	public int energy = maxEnergy;
 	public int direction;
+	public int color;
 	
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {		
 		
@@ -85,7 +86,7 @@ public class Player extends Drawable {
 	
 	private void drawEnergyBar(Graphics g, GameStatus gameStatus) {
 		//g.setColor(Color.WHITE);
-		setColor(g, starShip);
+		color = setColor(g, starShip);
 		int x = gameStatus.getCanvas().getWidth()/32;	
 		int y = gameStatus.getCanvas().getHeight()/27;
 		int width = x * 8;
@@ -101,7 +102,7 @@ public class Player extends Drawable {
 	}
 	
 	private void drawEnergy(Graphics g, GameStatus gameStatus, int x, int y, int width, int height) {
-		setColor(g, starShip);
+		color = setColor(g, starShip);
 		if(energy>0) {
 			if(order == 1) {				
 				g.fillRect(x + 2, y + 2, (int)(((double)width / (double)maxEnergy) * energy) - 4, height - 4);
@@ -115,7 +116,7 @@ public class Player extends Drawable {
 
 	private void drawHpBar(Graphics g, GameStatus gameStatus) {
 		//g.setColor(Color.WHITE);
-		setColor(g, starShip);
+		color = setColor(g, starShip);
 		int x = gameStatus.getCanvas().getWidth()/32;	
 		int y = gameStatus.getCanvas().getHeight()/18;
 		int width = x * 4;

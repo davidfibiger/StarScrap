@@ -82,14 +82,22 @@ public  class Drawable {
 		return checkColisionInternal(drawable1, drawable2) || checkColisionInternal(drawable2, drawable1);
 		
 	}
-	public void setColor(Graphics g, Image starShip) {
+	public int setColor(Graphics g, Image starShip) {
 		g.setColor(Color.WHITE);
-		if(starShip == StarScrapMain.starShip1) 
+		int color = 0;
+		if(starShip == StarScrapMain.starShip1) { 
 			g.setColor(Color.RED);
-		if(starShip == StarScrapMain.starShip2)
+			color = 1;
+		}	
+		if(starShip == StarScrapMain.starShip2) {
 			g.setColor(Color.BLUE);
-		if(starShip == StarScrapMain.starShip3)
+			color = 2;
+		}	
+		if(starShip == StarScrapMain.starShip3) {
 			g.setColor(Color.GREEN);
+			color = 3;
+		}
+		return color;	
 	}
 	
 }

@@ -11,6 +11,7 @@ public class Bullet extends Drawable {
 	private Image starShip;
 	public boolean laser;
 	private long bornTime;
+	public int color;
 	
 	public Bullet(double x, double y, int direction, int order, Image starShip, boolean laser) {		
 		speed = convert((double)((double)StarScrapMain.canvas.getWidth() / (double)1.536));
@@ -51,7 +52,7 @@ public class Bullet extends Drawable {
 		}
 	}
 	public void paint(Graphics g, GameStatus gameStatus) {	
-		setColor(g, starShip);
+		color = setColor(g, starShip);
 		
 		g.fillRect((int)x, (int)y, (int)width, (int)height);		
 	}

@@ -11,6 +11,8 @@ public class StarScrapMain {
 	static Image starShip3;
 	static Image logo;
 	static Image oneVOne;
+	static Image meteorite1;
+	static Image meteorite2;
 	static String shotSoundPath = "Sounds\\pew.wav";
 	static String deathSoundPath = "Sounds\\death.wav";
 	static String laserSoundPath = "Sounds\\laser.wav";
@@ -30,6 +32,8 @@ public class StarScrapMain {
 		gameStatus.setCanvas(canvas);
 		
 		try {
+			meteorite1 = ImageIO.read(new File("textures\\meteorite.png"));
+			meteorite2 = ImageIO.read(new File("textures\\meteorite2.png"));
             starShip1 = ImageIO.read(new File("textures\\starShip1.png"));
             starShip2 = ImageIO.read(new File("textures\\starShip2.png"));
             starShip3 = ImageIO.read(new File("textures\\starShip3.png"));

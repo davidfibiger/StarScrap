@@ -12,30 +12,34 @@ public class Meteorite extends Drawable{
 	private double speedY;
 	double deltaX;
 	double deltaY;
+	private double img;
 	//public double width;
 	//public double height;
 	private double direction;
 	private int intTarget;
 	
 	public Meteorite() {
-		speed = convert( /*Math.random()* (double)((double)StarScrapMain.canvas.getWidth() / (double)1.5)*/550);
+		img = Math.random()*2;
+		speed = convert(((double)StarScrapMain.canvas.getWidth() / (double)12) + (Math.random()* (double)((double)StarScrapMain.canvas.getWidth() / (double)8)));
 		width = (StarScrapMain.canvas.getWidth()/80) + (Math.random() * StarScrapMain.canvas.getWidth()/80);
 		height = width;
 		setSpawnLocation();
 		target = (int)(Math.random()*2);
 		if(target < 1) {
-			deltaX = StarScrapMain.gameStatus.player1.x - x;
-			deltaY = StarScrapMain.gameStatus.player1.y - y;
+			setDeltas(StarScrapMain.gameStatus.player1);
 			intTarget = 1;
 		}else {
-			deltaX = StarScrapMain.gameStatus.player2.x - x;
-			deltaY = StarScrapMain.gameStatus.player2.y - y;
+			setDeltas(StarScrapMain.gameStatus.player2);
 		}
 		
-		direction = 1/(Math.tan(deltaY/deltaX));
+		direction = Math.atan(deltaY/deltaX);
 		speedX = Math.cos(direction) * speed;
 		speedY = Math.sin(direction) * speed;
 		StarScrapMain.gameStatus.drawables.add(this);
+	}
+	public void setDeltas(Player player) {
+		deltaX = player.x - x;
+		deltaY = player.y - y;
 	}
 	public void update() {
 		time = System.currentTimeMillis();
@@ -50,13 +54,17 @@ public class Meteorite extends Drawable{
 		}
 	}
 	public void paint(Graphics g, GameStatus gameStatus) {
-		//g.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer)
-		if(intTarget == 1) {
+		if(img<1) {
+			g.drawImage(StarScrapMain.meteorite1, (int)x, (int)y, (int)width, (int)height, null);
+		}else {
+			g.drawImage(StarScrapMain.meteorite2, (int)x, (int)y, (int)width, (int)height, null);
+		}
+		/*if(intTarget == 1) {
 			g.setColor(Color.red);
 		}else {
 			g.setColor(Color.blue);
 		}
-		g.drawRect((int)x, (int)y, (int)width, (int)height);
+		g.drawRect((int)x, (int)y, (int)width, (int)height);*/
 	}
 
 	public void setSpawnLocation() {

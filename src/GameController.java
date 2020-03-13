@@ -77,17 +77,27 @@ public class GameController extends MouseAdapter implements KeyListener{
 		
 	}
 	private void meteoriteManagement() {		
-		if(lastMeteorite + 100 < System.currentTimeMillis() && !gameStatus.skinPick) {
+		if(lastMeteorite + 200 < System.currentTimeMillis() && !gameStatus.skinPick) {
 			createMeteorite();
 			lastMeteorite = System.currentTimeMillis();
 		}
 		for(Meteorite meteorite : gameStatus.meteorites) {
 			meteorite.update();
+			for(Meteorite m : gameStatus.meteorites) {
+				if(m.checkColision(m, meteorite) && !meteorite.equals(m)) {
+					gameStatus.junk.add(m);
+					explosion(m, 30, 4);
+					gameStatus.junk.add(meteorite);
+					explosion(meteorite, 30, 4);
+				}
+			}
 			for(Player player : gameStatus.players) {
 				if(meteorite.checkColision(meteorite, player)){
 					gameStatus.junk.add(meteorite);
-					
-					player.lives--;
+					if(!gameStatus.activeSkinPickPlayers.contains(player)) {
+						player.lives--;
+						explosion(meteorite, 30, 4);
+					}
 					if(player.lives <= 0) {
 						respawn(player);
 					}
@@ -96,8 +106,10 @@ public class GameController extends MouseAdapter implements KeyListener{
 			for(Bullet bullet : gameStatus.bullets) {
 				if((meteorite.checkColision(meteorite, bullet)||bullet.checkLaserHit(meteorite))&& !gameStatus.usedLasers.contains(bullet)){
 					gameStatus.junk.add(meteorite);
+					explosion(meteorite, 30, 4);
 					if(!bullet.laser) {
 						gameStatus.junk.add(bullet);
+						explosion(bullet, 20, bullet.color);
 					}else {
 						gameStatus.usedLasers.add(bullet);
 					}
@@ -127,6 +139,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 					}else {
 						gameStatus.usedLasers.add(bullet);
 					}
+					explosion(bullet,20, bullet.color);
 					player.lives--;
 					//printLives(player);
 					if(player.lives <= 0) {
@@ -171,16 +184,19 @@ public class GameController extends MouseAdapter implements KeyListener{
 	}
 	public void respawn(Player player) {
 		if(!gameStatus.activeSkinPickPlayers.contains(player)) {
-			for(int a = 0; a < 100; a++) {
-				Spark spark = new Spark((int)(player.x + player.width/2), (int)(player.y + player.height/2));
-				gameStatus.sparks.add(spark);
-				gameStatus.drawables.add(spark);
-			}
+			explosion(player, 100, player.color);
 			gameStatus.getSoundFrom(gameStatus.deathSounds).play();
 			gameStatus.activeSkinPickPlayers.add(player);
 			player.starShip = null;
 			gameStatus.skinPick = true;
 			player.lives = player.maxLives;
+		}
+	}
+	public void explosion(Drawable drawable,int size, int color) {
+		for(int a = 0; a < size; a++) {
+			Spark spark = new Spark((int)(drawable.x + drawable.width/2), (int)(drawable.y + drawable.height/2), size, color);
+			gameStatus.sparks.add(spark);
+			gameStatus.drawables.add(spark);
 		}
 	}
 	public void clear() {
