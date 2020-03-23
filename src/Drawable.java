@@ -79,6 +79,7 @@ public  class Drawable {
 	}
 	public boolean checkColision(Drawable drawable1, Drawable drawable2) {
 		
+		
 		return checkColisionInternal(drawable1, drawable2) || checkColisionInternal(drawable2, drawable1);
 		
 	}

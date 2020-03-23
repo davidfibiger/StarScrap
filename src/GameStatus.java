@@ -16,6 +16,7 @@ public class GameStatus {
 	public ArrayList<Sound> shotSounds;
 	public ArrayList<Sound> deathSounds;
 	public ArrayList<Sound> laserSounds;
+	public ArrayList<Sound> colisionSounds;
 	static boolean skinPick = false;
 	static boolean menu = true;
 	//Player activeMenuPlayer;
@@ -27,10 +28,12 @@ public class GameStatus {
 		shotSounds = new ArrayList<Sound>();
 		deathSounds = new ArrayList<Sound>();
 		laserSounds = new ArrayList<Sound>();
-		meteorites = new ArrayList<Meteorite>();
+		colisionSounds = new ArrayList<Sound>();
 		addSounds(shotSounds, StarScrapMain.shotSoundPath);
 		addSounds(deathSounds, StarScrapMain.deathSoundPath);
 		addSounds(laserSounds, StarScrapMain.laserSoundPath);
+		addSounds(colisionSounds, StarScrapMain.colisionSoundPath);
+		meteorites = new ArrayList<Meteorite>();
 		drawables = new ArrayList();
 		players = new ArrayList();
 		junk = new ArrayList();
@@ -74,20 +77,18 @@ public class GameStatus {
 		Sound soundMax = null;
 		int max = 0;
 		for(Sound sound : sounds) {	
-			
+			if(sound.clip.getFramePosition() == 0) {
+				return sound;			
+			}	
 			
 			if(max < sound.clip.getFramePosition()) { 
 				max = sound.clip.getFramePosition();
 				soundMax = sound;
 			}
-			if(sound.clip.getFramePosition() == 0) {
-				return sound;			
-			}
+		
 		}
 		
-		for(Sound s : sounds) {
-			
-		}
+		
 		return soundMax;
 		
 	}

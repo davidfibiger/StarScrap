@@ -85,6 +85,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 			meteorite.update();
 			for(Meteorite m : gameStatus.meteorites) {
 				if(m.checkColision(m, meteorite) && !meteorite.equals(m)) {
+					StarScrapMain.gameStatus.getSoundFrom(StarScrapMain.gameStatus.colisionSounds).play();
 					gameStatus.junk.add(m);
 					explosion(m, 30, 4);
 					gameStatus.junk.add(meteorite);
@@ -93,9 +94,11 @@ public class GameController extends MouseAdapter implements KeyListener{
 			}
 			for(Player player : gameStatus.players) {
 				if(meteorite.checkColision(meteorite, player)){
-					gameStatus.junk.add(meteorite);
+					
 					if(!gameStatus.activeSkinPickPlayers.contains(player)) {
+						gameStatus.junk.add(meteorite);
 						player.lives--;
+						StarScrapMain.gameStatus.getSoundFrom(StarScrapMain.gameStatus.colisionSounds).play();
 						explosion(meteorite, 30, 4);
 					}
 					if(player.lives <= 0) {
@@ -107,6 +110,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 				if((meteorite.checkColision(meteorite, bullet)||bullet.checkLaserHit(meteorite))&& !gameStatus.usedLasers.contains(bullet)){
 					gameStatus.junk.add(meteorite);
 					explosion(meteorite, 30, 4);
+					StarScrapMain.gameStatus.getSoundFrom(StarScrapMain.gameStatus.colisionSounds).play();
 					if(!bullet.laser) {
 						gameStatus.junk.add(bullet);
 						explosion(bullet, 20, bullet.color);
@@ -141,6 +145,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 					}
 					explosion(bullet,20, bullet.color);
 					player.lives--;
+					StarScrapMain.gameStatus.getSoundFrom(StarScrapMain.gameStatus.colisionSounds).play();
 					//printLives(player);
 					if(player.lives <= 0) {
 						respawn(player);

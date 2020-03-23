@@ -16,6 +16,7 @@ public class StarScrapMain {
 	static String shotSoundPath = "Sounds\\pew.wav";
 	static String deathSoundPath = "Sounds\\death.wav";
 	static String laserSoundPath = "Sounds\\laser.wav";
+	static String colisionSoundPath = "Sounds\\colision.wav";
 	static DrawingCanvas canvas;
 	public static void main(String[] args) {
 		JFrame  f = new JFrame();		
