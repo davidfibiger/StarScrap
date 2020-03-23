@@ -190,6 +190,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 			player.starShip = null;
 			gameStatus.skinPick = true;
 			player.lives = player.maxLives;
+			player.toRandomPosition(player);
 		}
 	}
 	public void explosion(Drawable drawable,int size, int color) {
@@ -200,11 +201,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 		}
 	}
 	public void clear() {
-		/*
-		System.out.print("junk: "+gameStatus.junk.size());
-		System.out.print("bullets: "+gameStatus.bullets.size());
-		System.out.println("drawables: "+gameStatus.drawables.size());
-		*/
+		
 		for(Drawable drawable : gameStatus.junk) {
 			
 			gameStatus.bullets.remove(drawable);
@@ -233,29 +230,24 @@ public class GameController extends MouseAdapter implements KeyListener{
 		
 	}
 	private void chooseStarShip(MouseEvent e) {
-		/*for(Player player : gameStatus.activeMenuPlayers) {
-			if(player.starShip != null) {				
-				gameStatus.menu = false;
-				return;
-			}
-		}*/
+		
 		int x = (int)canvas.getWidth()/7;
 		int y = ((int)canvas.getHeight()/7)*3;
 		if(e.getY() > y && e.getY() < (y/3)*4) {
 			if(e.getX() > x && e.getX() < x*2) {				
-				activeMenuPlayerToCenter(gameStatus.activeSkinPickPlayers.get(0));				
+							
 				gameStatus.activeSkinPickPlayers.get(0).starShip = StarScrapMain.starShip1;
 				endOrContinueMenu();				
 			}
 			
 			if (e.getX() > x*3 && e.getX() < x*4) {				
-				activeMenuPlayerToCenter(gameStatus.activeSkinPickPlayers.get(0));
+				
 				gameStatus.activeSkinPickPlayers.get(0).starShip = StarScrapMain.starShip2;
 				endOrContinueMenu();
 				
 			}
 			if(e.getX() > x*5 && e.getX() < x*6) {	
-				activeMenuPlayerToCenter(gameStatus.activeSkinPickPlayers.get(0));
+				
 				gameStatus.activeSkinPickPlayers.get(0).starShip = StarScrapMain.starShip3;
 				endOrContinueMenu();
 			}
@@ -269,14 +261,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 			gameStatus.skinPick = false;
 		
 	}
-	private void activeMenuPlayerToCenter(Player activeMenuPlayer) {
-		if(activeMenuPlayer.starShip == null) {
-			activeMenuPlayer.x = gameStatus.getCanvas().getWidth()/2;
-			activeMenuPlayer.y = gameStatus.getCanvas().getHeight()/2;
-		}
-	}
-	
-	
+		
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub

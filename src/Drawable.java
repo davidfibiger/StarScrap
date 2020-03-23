@@ -99,5 +99,8 @@ public  class Drawable {
 		}
 		return color;	
 	}
-	
+	public void toRandomPosition(Player player) {
+		player.x = Math.random()*StarScrapMain.gameStatus.getCanvas().getWidth()-player.width;
+		player.y = Math.random()*StarScrapMain.gameStatus.getCanvas().getHeight()-player.height;
+	}
 }

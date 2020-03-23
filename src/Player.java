@@ -37,9 +37,6 @@ public class Player extends Drawable {
 	public int color;
 	
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {		
-		
-		
-
 		GameStatus.skinPick = true;
 		defaultSpeed = convert((double)((double)StarScrapMain.canvas.getWidth() / (double)3.84));
 		//width = 80;
@@ -56,8 +53,12 @@ public class Player extends Drawable {
 		this.shootingKey = shootingKey;
 		this.skinKey = skinKey;
 		this.order = order;
-		
+		toRandomPosition(this);
 	}
+
+
+
+	
 
 	
 	
