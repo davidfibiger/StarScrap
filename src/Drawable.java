@@ -101,7 +101,18 @@ public  class Drawable {
 		return color;	
 	}
 	public void toRandomPosition(Player player) {
-		player.x = Math.random()*StarScrapMain.gameStatus.getCanvas().getWidth()-player.width;
-		player.y = Math.random()*StarScrapMain.gameStatus.getCanvas().getHeight()-player.height;
+		double x = (double)Math.random()*(double)StarScrapMain.gameStatus.getCanvas().getWidth();
+		if(x>(double)StarScrapMain.gameStatus.getCanvas().getWidth()/2) {
+			player.x = x - player.width;
+		}else {
+			player.x = x;
+		}
+		
+		double y = (double)Math.random()*(double)StarScrapMain.gameStatus.getCanvas().getHeight();
+		if(y>(double)StarScrapMain.gameStatus.getCanvas().getHeight()/2) {
+			player.y = y - player.height;
+		}else {
+			player.y = y;
+		}
 	}
 }

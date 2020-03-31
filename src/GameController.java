@@ -159,6 +159,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 	}
 	public void playersManagement() {
 		for(Player player : gameStatus.players) {
+			
 			player.movementListener(gameStatus, keysDown);
 			player.actions(keysDown, gameStatus);
 			player.energyUpdate();
