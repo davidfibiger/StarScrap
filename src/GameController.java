@@ -37,7 +37,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 		this.canvas = canvas;
 		
 		while(running) {
-			if(lastFrame + 3 < System.currentTimeMillis()) {
+			if(lastFrame +3 < System.currentTimeMillis()) {
 				if(!gameStatus.menu && gameStatus.players.size()==0)
 					createPlayers();
 				/*for(Integer k : keysDown) {
