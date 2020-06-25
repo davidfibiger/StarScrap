@@ -39,7 +39,7 @@ public class StarScrapMain {
             starShip2 = ImageIO.read(new File("textures\\starShip2.png"));
             starShip3 = ImageIO.read(new File("textures\\starShip3.png"));
             logo = ImageIO.read(new File("textures\\logo20.png"));
-            
+            logo = logo.getScaledInstance((int)((canvas.getWidth()/4)*3), (int)((canvas.getHeight()/4)*3), Image.SCALE_SMOOTH);
             oneVOne = ImageIO.read(new File("textures\\1v1.png"));
             
         }catch( java.io.IOException e){
@@ -52,7 +52,7 @@ public class StarScrapMain {
 		canvas.addMouseListener(controller);
 		canvas.addKeyListener(controller);
 		controller.run(canvas);
-		logo = logo.getScaledInstance((int)((canvas.getWidth()/4)*3), (int)((canvas.getHeight()/4)*3), (Integer) null);
+		
 		
 	}
 
