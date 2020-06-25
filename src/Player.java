@@ -91,7 +91,7 @@ public class Player extends Drawable {
 		int x = gameStatus.getCanvas().getWidth()/32;	
 		int y = gameStatus.getCanvas().getHeight()/27;
 		int width = x * 8;
-		int height = y / 6;
+		int height = y / 3;
 		if(order == 1) {
 			g.drawRect(x, y, width, height);
 			drawEnergy(g, gameStatus, x, y, width, height);
