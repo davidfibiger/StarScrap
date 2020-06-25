@@ -43,6 +43,7 @@ public class GameStatus {
 		stars = new ArrayList();
 		sparks = new ArrayList();
 		
+		
 		//player3 = new Player(3, 101, 98, 97, 99, 96, 10,KeyEvent.VK_3);
 		//activeMenuPlayer = player1;
 		/*
