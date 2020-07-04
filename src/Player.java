@@ -150,30 +150,44 @@ public class Player extends Drawable {
 			}
 		}
 	}
+	
 
 	void movementListener(GameStatus gameStatus, ArrayList<Integer> keysDown) {
 		long time = System.currentTimeMillis();
 		
+		//nahoru
 		if(lastTimeForward >0) {
 			if(keysDown.contains(leftwardsKey) && keysDown.contains(rightwardsKey)) {
 				y -= calculateMovement(time, lastTimeForward, speed);
 				direction = 1;
 			}else if(keysDown.contains(leftwardsKey) || keysDown.contains(rightwardsKey)) {
-				y -= calculateMovement(time, lastTimeForward, speed) / Math.sqrt(2);	
+				y -= calculateMovement(time, lastTimeForward, speed) / Math.sqrt(2);
+				//sikmo nahoru
+				if(keysDown.contains(leftwardsKey)){
+					direction = 8;
+				}else {
+					direction = 2;
+				}
 			}else {
 				y -= calculateMovement(time, lastTimeForward, speed);
 				direction = 1;
 			}					
 		}
-
 		lastTimeForward = getLastTime(time,lastTimeForward,forwardKey,y, keysDown);
 		
+		//dolu
 		if(lastTimeBackwards >0) {
 			if(keysDown.contains(leftwardsKey) && keysDown.contains(rightwardsKey)) {
 				y += calculateMovement(time, lastTimeBackwards, speed);
 				direction = 5;
 			}else if(keysDown.contains(leftwardsKey) || keysDown.contains(rightwardsKey)) {
 				y += calculateMovement(time, lastTimeBackwards, speed) / Math.sqrt(2);
+				//sikmo dolu
+				if(keysDown.contains(leftwardsKey)) {
+					direction = 6;
+				}else {
+					direction = 4;
+				}
 			}else {
 				y += calculateMovement(time, lastTimeBackwards, speed);
 				direction = 5;
@@ -181,12 +195,19 @@ public class Player extends Drawable {
 		}
 		lastTimeBackwards = getLastTime(time,lastTimeBackwards, backwardsKey,(gameStatus.getCanvas().getHeight() - height) - y, keysDown);
 		
+		//doleva
 		if(lastTimeLeftwards >0) {
 			if(keysDown.contains(forwardKey) && keysDown.contains(backwardsKey)) {
 				x -= calculateMovement(time, lastTimeLeftwards, speed);
 				direction = 7;
 			}else if(keysDown.contains(forwardKey) || keysDown.contains(backwardsKey)) {
 				x -= calculateMovement(time, lastTimeLeftwards, speed) / Math.sqrt(2);
+				//sikmo doleva
+				if(keysDown.contains(forwardKey)) {
+					direction = 8;
+				}else {
+					direction = 6;
+				}
 			}else {
 				x -= calculateMovement(time, lastTimeLeftwards, speed);
 				direction = 7;
@@ -194,12 +215,19 @@ public class Player extends Drawable {
 		}
 		lastTimeLeftwards = getLastTime(time,lastTimeLeftwards, leftwardsKey, x, keysDown);
 		
+		//doprava
 		if(lastTimeRightwards >0) {
 			if(keysDown.contains(forwardKey) && keysDown.contains(backwardsKey)) {
 				x += calculateMovement(time, lastTimeRightwards, speed);	
 				direction = 3;
 			}else if(keysDown.contains(forwardKey) || keysDown.contains(backwardsKey)) {
 				x += calculateMovement(time, lastTimeRightwards, speed) / Math.sqrt(2);	
+				//sikmo doprava
+				if(keysDown.contains(forwardKey)) {
+					direction = 2;
+				}else {
+					direction = 4;
+				}
 			}else{
 				x += calculateMovement(time, lastTimeRightwards, speed);
 				direction = 3;
