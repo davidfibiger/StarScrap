@@ -16,7 +16,7 @@ public class Bullet extends Drawable {
 	public Bullet(double x, double y, int direction, int order, Image starShip, boolean laser) {		
 		speed = convert((double)((double)StarScrapMain.canvas.getWidth() / (double)1.536));
 		this.direction = direction;
-		if(direction == 3 || direction == 7) {
+		if(direction == 2 || direction == 6) {
 			height = (double)((double)StarScrapMain.canvas.getWidth() / (double)700);
 			width = (double)((double)StarScrapMain.canvas.getWidth() / (double)150);
 		}else {
@@ -30,15 +30,15 @@ public class Bullet extends Drawable {
 		this.laser = laser;
 		if(laser) {
 			bornTime = System.currentTimeMillis();
-			if(direction == 1) {
+			if(direction == 0) {
 				this.height = y;
 				this.y = 0;
 			}
-			if(direction == 5)
+			if(direction == 4)
 				this.height = 10000;
-			if(direction == 3) 				
+			if(direction == 2) 				
 				this.width  = 10000;
-			if(direction == 7) {				
+			if(direction == 6) {				
 				this.width = x;
 				this.x = 0;
 			}
@@ -81,13 +81,13 @@ public class Bullet extends Drawable {
 	
 	public void move() {
 		long time = System.currentTimeMillis();
-		if (direction == 1)
+		if (direction == 0)
 			y -= calculateMovement(time, lastTime, speed);
-		if(direction == 3)
+		if(direction == 2)
 			x += calculateMovement(time, lastTime, speed);
-		if(direction == 5)
+		if(direction == 4)
 			y += calculateMovement(time, lastTime, speed);
-		if(direction == 7)
+		if(direction == 6)
 			x -= calculateMovement(time, lastTime, speed);
 		lastTime = time;		
 	}

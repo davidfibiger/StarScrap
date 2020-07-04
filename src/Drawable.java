@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 public  class Drawable {
@@ -114,5 +117,19 @@ public  class Drawable {
 		}else {
 			player.y = y;
 		}
+	}
+	public void drawRotatedImage(Graphics g , Image image, int rotationInDegrees, int x, int y, int width, int height) {
+		double rotationInRadian = Math.toRadians(rotationInDegrees);
+		
+		double scaleX = (double)width / (double)image.getWidth(null);
+		double scaleY = (double)height / (double)image.getHeight(null);
+		
+		AffineTransform at = AffineTransform.getTranslateInstance(x, y);
+		
+		at.rotate(rotationInRadian, width/2, height/2);
+		at.scale(scaleX, scaleY);
+		Graphics2D g2d = (Graphics2D) g;		
+		g2d.drawImage(image, at, null);
+		
 	}
 }

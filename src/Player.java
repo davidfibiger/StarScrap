@@ -63,7 +63,13 @@ public class Player extends Drawable {
 	
 	
 	public void paint(Graphics g, GameStatus gameStatus) {
-		g.drawImage(starShip, (int)x, (int)y, (int)width, (int)height, null);
+		if(starShip != null) {
+			if(direction == 0) {		
+				g.drawImage(starShip, (int)x, (int)y, (int)width, (int)height, null);
+			}else {
+				drawRotatedImage(g, starShip, 45*direction, (int)x, (int)y, (int)width, (int)height);
+			}
+		}
 		if(gameStatus.skinPick) {
 	        	int x = (int)gameStatus.getCanvas().getWidth()/7;	    		
 	    		final int width = x;
@@ -159,18 +165,18 @@ public class Player extends Drawable {
 		if(lastTimeForward >0) {
 			if(keysDown.contains(leftwardsKey) && keysDown.contains(rightwardsKey)) {
 				y -= calculateMovement(time, lastTimeForward, speed);
-				direction = 1;
+				direction = 0;
 			}else if(keysDown.contains(leftwardsKey) || keysDown.contains(rightwardsKey)) {
 				y -= calculateMovement(time, lastTimeForward, speed) / Math.sqrt(2);
 				//sikmo nahoru
 				if(keysDown.contains(leftwardsKey)){
-					direction = 8;
+					direction = 7;
 				}else {
-					direction = 2;
+					direction = 1;
 				}
 			}else {
 				y -= calculateMovement(time, lastTimeForward, speed);
-				direction = 1;
+				direction = 0;
 			}					
 		}
 		lastTimeForward = getLastTime(time,lastTimeForward,forwardKey,y, keysDown);
@@ -179,18 +185,18 @@ public class Player extends Drawable {
 		if(lastTimeBackwards >0) {
 			if(keysDown.contains(leftwardsKey) && keysDown.contains(rightwardsKey)) {
 				y += calculateMovement(time, lastTimeBackwards, speed);
-				direction = 5;
+				direction = 4;
 			}else if(keysDown.contains(leftwardsKey) || keysDown.contains(rightwardsKey)) {
 				y += calculateMovement(time, lastTimeBackwards, speed) / Math.sqrt(2);
 				//sikmo dolu
 				if(keysDown.contains(leftwardsKey)) {
-					direction = 6;
+					direction = 5;
 				}else {
-					direction = 4;
+					direction = 3;
 				}
 			}else {
 				y += calculateMovement(time, lastTimeBackwards, speed);
-				direction = 5;
+				direction = 4;
 			}						
 		}
 		lastTimeBackwards = getLastTime(time,lastTimeBackwards, backwardsKey,(gameStatus.getCanvas().getHeight() - height) - y, keysDown);
@@ -199,18 +205,18 @@ public class Player extends Drawable {
 		if(lastTimeLeftwards >0) {
 			if(keysDown.contains(forwardKey) && keysDown.contains(backwardsKey)) {
 				x -= calculateMovement(time, lastTimeLeftwards, speed);
-				direction = 7;
+				direction = 6;
 			}else if(keysDown.contains(forwardKey) || keysDown.contains(backwardsKey)) {
 				x -= calculateMovement(time, lastTimeLeftwards, speed) / Math.sqrt(2);
 				//sikmo doleva
 				if(keysDown.contains(forwardKey)) {
-					direction = 8;
+					direction = 7;
 				}else {
-					direction = 6;
+					direction = 5;
 				}
 			}else {
 				x -= calculateMovement(time, lastTimeLeftwards, speed);
-				direction = 7;
+				direction = 6;
 			}						
 		}
 		lastTimeLeftwards = getLastTime(time,lastTimeLeftwards, leftwardsKey, x, keysDown);
@@ -219,18 +225,18 @@ public class Player extends Drawable {
 		if(lastTimeRightwards >0) {
 			if(keysDown.contains(forwardKey) && keysDown.contains(backwardsKey)) {
 				x += calculateMovement(time, lastTimeRightwards, speed);	
-				direction = 3;
+				direction = 2;
 			}else if(keysDown.contains(forwardKey) || keysDown.contains(backwardsKey)) {
 				x += calculateMovement(time, lastTimeRightwards, speed) / Math.sqrt(2);	
 				//sikmo doprava
 				if(keysDown.contains(forwardKey)) {
-					direction = 2;
+					direction = 1;
 				}else {
-					direction = 4;
+					direction = 3;
 				}
 			}else{
 				x += calculateMovement(time, lastTimeRightwards, speed);
-				direction = 3;
+				direction = 2;
 			}					
 		}
 		lastTimeRightwards = getLastTime(time,lastTimeRightwards, rightwardsKey,(gameStatus.getCanvas().getWidth() - width) - x, keysDown);
@@ -256,25 +262,25 @@ public class Player extends Drawable {
 			
 		}
 		if(keysDown.contains(shootingKey) && starShip!=null) {			
-			if(direction == 1) {
+			if(direction == 0) {
 				double bX = x + width/2 - 5/2;
 				double bY = y + height / 2;
 				shoot(gameStatus, bX, bY);
 				laser(gameStatus, bX, bY);
 			}	
-			if(direction == 3) {
+			if(direction == 2) {
 				double bX = x + width / 2;
 				double bY = y + height / 2 - 5/2;
 				shoot(gameStatus, bX, bY);
 				laser(gameStatus, bX, bY);
 			}	
-			if(direction == 5) {
+			if(direction == 4) {
 				double bX = x + width / 2 - 5/2;
 				double bY = y + height / 2;
 				shoot(gameStatus,bX, bY);
 				laser(gameStatus, bX, bY);
 			}	
-			if(direction == 7) {
+			if(direction == 6) {
 				double bX = x + width / 2;
 				double bY = y + height / 2 - 5/2;
 				shoot(gameStatus, bX, bY);
