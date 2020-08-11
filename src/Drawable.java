@@ -2,7 +2,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
@@ -68,13 +71,13 @@ public  class Drawable {
 		if(drawable1.x >= drawable2.x && drawable1.x <= drawable2.x + drawable2.width) {
 			if((drawable1.y >= drawable2.y && drawable1.y <= drawable2.y + drawable2.height) || (drawable1.y + drawable1.height >= drawable2.y && drawable1.y + drawable1.height <= drawable2.y + drawable2.height)) {
 				colision = true;
-				//System.out.println("colizion");
+				//System.out.println("colision");
 			}
 		}	
 		if(drawable1.x + drawable1.width >= drawable2.x && drawable1.x + drawable1.width < drawable2.x +drawable2.width) {
 			if((drawable1.y >= drawable2.y && drawable1.y <= drawable2.y + drawable2.height) || (drawable1.y + drawable1.height >= drawable2.y && drawable1.y + drawable1.height <= drawable2.y + drawable2.height)){
 				colision = true;
-				//System.out.println("colizion");
+				//System.out.println("colision");
 			}
 		}
 		
@@ -86,20 +89,20 @@ public  class Drawable {
 		return checkColisionInternal(drawable1, drawable2) || checkColisionInternal(drawable2, drawable1);
 		
 	}
-	public int setColor(Graphics g, Image starShip) {
+	public Color setColor(Graphics g, Image starShip) {
 		g.setColor(Color.WHITE);
-		int color = 0;
+		Color color = Color.WHITE ;
 		if(starShip == StarScrapMain.starShip1) { 
 			g.setColor(Color.RED);
-			color = 1;
+			color = Color.RED;
 		}	
 		if(starShip == StarScrapMain.starShip2) {
 			g.setColor(Color.BLUE);
-			color = 2;
+			color = Color.BLUE;
 		}	
 		if(starShip == StarScrapMain.starShip3) {
 			g.setColor(Color.GREEN);
-			color = 3;
+			color = Color.GREEN;
 		}
 		return color;	
 	}
@@ -131,5 +134,26 @@ public  class Drawable {
 		Graphics2D g2d = (Graphics2D) g;		
 		g2d.drawImage(image, at, null);
 		
+	}
+	public void drawRotatedRect(Graphics g, int rotationInDegrees, int x, int y, int width, int height, Color color){
+	    //super.paintComponent(g);
+		Point point = new Point(x, y);
+		Point pointDestination = new Point();
+	    Graphics2D g2d = (Graphics2D)g;
+	    g2d.setColor(color);
+	    Rectangle rect = new Rectangle(x, y, width, height);
+
+	    g2d.rotate(Math.toRadians(rotationInDegrees));
+	    try{
+	    	g2d.getTransform().inverseTransform(point, pointDestination);
+		    rect.x=pointDestination.x;
+		    rect.y=pointDestination.y;
+		    
+		    g2d.fill(rect);
+	    } catch(NoninvertibleTransformException ble){
+	    	System.out.println("fuj ble");
+	    } finally {
+	    	g2d.rotate(-Math.toRadians(rotationInDegrees));
+	    }
 	}
 }

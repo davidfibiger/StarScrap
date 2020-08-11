@@ -34,7 +34,7 @@ public class Player extends Drawable {
 	public final int maxEnergy = 100;
 	public int energy = maxEnergy;
 	public int direction;
-	public int color;
+	public Color color;
 	
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {		
 		GameStatus.skinPick = true;
@@ -262,30 +262,31 @@ public class Player extends Drawable {
 			
 		}
 		if(keysDown.contains(shootingKey) && starShip!=null) {			
-			if(direction == 0) {
-				double bX = x + width/2 - 5/2;
-				double bY = y + height / 2;
+			/*if(direction == 0) {*/
+				double bX = x + width / 2 /*- Bullet.width/2*/;
+				double bY = y + height / 2 /*- Bullet.height/2*/;
 				shoot(gameStatus, bX, bY);
 				laser(gameStatus, bX, bY);
-			}	
+			/*{	
 			if(direction == 2) {
 				double bX = x + width / 2;
-				double bY = y + height / 2 - 5/2;
+				double bY = y + height / 2- Bullet.height/2;
 				shoot(gameStatus, bX, bY);
 				laser(gameStatus, bX, bY);
 			}	
 			if(direction == 4) {
-				double bX = x + width / 2 - 5/2;
+				double bX = x + width / 2- Bullet.width/2;
 				double bY = y + height / 2;
 				shoot(gameStatus,bX, bY);
 				laser(gameStatus, bX, bY);
 			}	
 			if(direction == 6) {
 				double bX = x + width / 2;
-				double bY = y + height / 2 - 5/2;
+				double bY = y + height / 2- Bullet.height/2;
 				shoot(gameStatus, bX, bY);
 				laser(gameStatus, bX, bY);
-			}
+			}*/
+			
 			
 		}else {
 			shooted = false;

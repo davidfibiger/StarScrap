@@ -6,7 +6,7 @@ public class Meteorite extends Drawable{
 	private long time;
 	private long lastTime;
 	private int target;
-	private int spawningField;
+	private double spawningField;
 	//private double speed;
 	private double speedX;
 	private double speedY;
@@ -17,6 +17,7 @@ public class Meteorite extends Drawable{
 	//public double height;
 	private double direction;
 	private int intTarget;
+	public Color color = Color.orange;
 	
 	public Meteorite() {
 		img = Math.random()*2;
@@ -49,7 +50,7 @@ public class Meteorite extends Drawable{
 		}
 		lastTime = time;
 		
-		if(x < -300 || x > 300 + StarScrapMain.canvas.getWidth() || y < -300 || y > 300 + StarScrapMain.canvas.getHeight()) {
+		if(x < -1000 || x > 1000 + StarScrapMain.canvas.getWidth() || y < -1000 || y > 1000 + StarScrapMain.canvas.getHeight()) {
 			StarScrapMain.gameStatus.junk.add(this);
 		}
 	}
@@ -68,7 +69,7 @@ public class Meteorite extends Drawable{
 	}
 
 	public void setSpawnLocation() {
-		spawningField = (int)(Math.random()*4);
+		spawningField = Math.random()*4;
 		if(spawningField < 1) {
 			//up
 			x = -250 + ((Math.random() * StarScrapMain.canvas.getWidth()) + Math.random() * 500);
@@ -81,10 +82,11 @@ public class Meteorite extends Drawable{
 			//left
 			x = -250;
 			y = -250 + ((Math.random() * StarScrapMain.canvas.getHeight()) + Math.random() * 500);
-		}else {
+		}else{
 			//right
-			x = 250 + StarScrapMain.canvas.getWidth();;
+			x = 250 + StarScrapMain.canvas.getWidth();
 			y = -250 + ((Math.random() * StarScrapMain.canvas.getHeight()) + Math.random() * 500);
+			System.out.println("right");
 		}
 	}
 	

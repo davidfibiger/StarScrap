@@ -1,28 +1,27 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 
 public class Bullet extends Drawable {
 	private long lastTime;
-	//public double height;
-	//public double width;
 	private int direction;
 	public int order;
 	private Image starShip;
 	public boolean laser;
 	private long bornTime;
-	public int color;
+	public Color color;
 	
 	public Bullet(double x, double y, int direction, int order, Image starShip, boolean laser) {		
 		speed = convert((double)((double)StarScrapMain.canvas.getWidth() / (double)1.536));
 		this.direction = direction;
-		if(direction == 2 || direction == 6) {
+		/*if(direction == 2 || direction == 6) {
 			height = (double)((double)StarScrapMain.canvas.getWidth() / (double)700);
 			width = (double)((double)StarScrapMain.canvas.getWidth() / (double)150);
-		}else {
+		}else {*/
 			height = (double)((double)StarScrapMain.canvas.getWidth() / (double)150);
 			width = (double)((double)StarScrapMain.canvas.getWidth() / (double)700);
-		}
+		/*}*/
 		this.x = x;
 		this.y = y;
 		this.order = order;
@@ -31,17 +30,17 @@ public class Bullet extends Drawable {
 		if(laser) {
 			bornTime = System.currentTimeMillis();
 			if(direction == 0) {
-				this.height = y;
-				this.y = 0;
+				//this.height = y;
+				//this.y = 0;
 			}
-			if(direction == 4)
+			/*if(direction == 4)*/
 				this.height = 10000;
-			if(direction == 2) 				
+			/*if(direction == 2) 				
 				this.width  = 10000;
 			if(direction == 6) {				
 				this.width = x;
 				this.x = 0;
-			}
+			}*/
 			
 			speed = 0;
 			/*System.out.print("x: "+ x);
@@ -54,7 +53,13 @@ public class Bullet extends Drawable {
 	public void paint(Graphics g, GameStatus gameStatus) {	
 		color = setColor(g, starShip);
 		
-		g.fillRect((int)x, (int)y, (int)width, (int)height);		
+		/*rect = g.fillRect((int)x, (int)y, (int)width, (int)height);		*/
+		if(laser) {
+			drawRotatedRect(g, 45*direction + 180, (int)x, (int)y, (int)width, (int)height, color);
+		}else {
+			drawRotatedRect(g, 45*direction, (int)x, (int)y, (int)width, (int)height, color);
+		}
+		
 	}
 	
 	public void checkJustification(GameStatus gameStatus) {
@@ -69,9 +74,9 @@ public class Bullet extends Drawable {
 	}
 	public boolean checkLaserHit(Drawable drawable) {
 		if(laser) {
-			for(double dx = drawable.x; dx <= drawable.x + drawable.width; dx++) {
-				for(double dy = drawable.y; dy <= drawable.y + drawable.width; dy++) {
-					if(dx >= x && dx <= x + width && dy >= y && dy <= y + height)
+			for(double dx = drawable.x; dx <= drawable.x + drawable.height; dx++) {
+				for(double dy = drawable.y; dy <= drawable.y + drawable.height; dy++) {
+					if(dx >= x && dx <= x + height && dy >= y && dy <= y + height)
 						return true;
 				}
 			}
@@ -81,14 +86,38 @@ public class Bullet extends Drawable {
 	
 	public void move() {
 		long time = System.currentTimeMillis();
-		if (direction == 0)
+		if(direction == 0)
 			y -= calculateMovement(time, lastTime, speed);
+		
+		if(direction == 1) {
+			y -= calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
+			x += calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
+		}
+		
 		if(direction == 2)
 			x += calculateMovement(time, lastTime, speed);
+		
+		if(direction == 3) {
+			y += calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
+			x += calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
+		}
+		
 		if(direction == 4)
 			y += calculateMovement(time, lastTime, speed);
+		
+		if(direction == 5) {
+			y += calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
+			x -= calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
+		}
+		
 		if(direction == 6)
 			x -= calculateMovement(time, lastTime, speed);
+		
+		if(direction == 7) {
+			y -= calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
+			x -= calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
+		}
+		
 		lastTime = time;		
 	}
 

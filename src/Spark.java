@@ -7,8 +7,8 @@ public class Spark extends Drawable{
 	private long lastTime;
 	private int direction;
 	private double size;
-	int color;
-	public Spark(int x, int y, double size, int color){
+	Color color;
+	public Spark(int x, int y, double size, Color color){
 		this.size = size/100;
 		width = Math.random() * ( StarScrapMain.gameStatus.getCanvas().getWidth()/300)*this.size;
 		height = width;
@@ -32,16 +32,9 @@ public class Spark extends Drawable{
 			StarScrapMain.gameStatus.junk.add(this);
 		}
 	}
-	public void paint(Graphics g, GameStatus gameStatus) {
-		if(color == 1)
-			g.setColor(Color.red);
-		if(color == 2)
-			g.setColor(Color.blue);
-		if(color == 3)
-			g.setColor(Color.green);
-		if(color == 4) {
-			g.setColor(Color.yellow);
-		}
+	public void paint(Graphics g, GameStatus gameStatus) {		
+			g.setColor(color);
+		
 		g.fillRect((int)x, (int)y, (int)width, (int)height);
 	}
 }
