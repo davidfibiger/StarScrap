@@ -74,12 +74,24 @@ public class Bullet extends Drawable {
 	}
 	public boolean checkLaserHit(Drawable drawable) {
 		if(laser) {
-			for(double dx = drawable.x; dx <= drawable.x + drawable.height; dx++) {
+			/*for(double dx = drawable.x; dx <= drawable.x + drawable.height; dx++) {
 				for(double dy = drawable.y; dy <= drawable.y + drawable.height; dy++) {
 					if(dx >= x && dx <= x + height && dy >= y && dy <= y + height)
 						return true;
 				}
-			}
+			}*/
+			
+			
+				for(double hypotenuse  = 0; hypotenuse < StarScrapMain.canvas.getWidth() + StarScrapMain.canvas.getHeight();hypotenuse++) {
+					double x = (hypotenuse * Math.cos((direction-2)*(Math.PI/4)))+this.x;
+					double y = (hypotenuse * Math.sin((direction-2)*(Math.PI/4)))+this.y;
+					
+					if(x > drawable.x && x < drawable.x + drawable.width && y > drawable.y && y < drawable.y + drawable.height) {
+						return true;
+					}
+				}
+			
+			
 		}	
 		return false;
 	}

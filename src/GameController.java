@@ -107,7 +107,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 				}
 			}
 			for(Bullet bullet : gameStatus.bullets) {
-				if((meteorite.checkColision(meteorite, bullet)||bullet.checkLaserHit(meteorite))&& !gameStatus.usedLasers.contains(bullet)){
+				if((meteorite.checkColision(meteorite, bullet)||bullet.checkLaserHit(meteorite))){
 					gameStatus.junk.add(meteorite);
 					explosion(meteorite, 30, meteorite.color);
 					StarScrapMain.gameStatus.getSoundFrom(StarScrapMain.gameStatus.colisionSounds).play();
@@ -115,7 +115,9 @@ public class GameController extends MouseAdapter implements KeyListener{
 						gameStatus.junk.add(bullet);
 						explosion(bullet, 20, bullet.color);
 					}else {
-						gameStatus.usedLasers.add(bullet);
+						if(!gameStatus.usedLasers.contains(bullet)){
+							gameStatus.usedLasers.add(bullet);
+						}
 					}
 				}
 			}

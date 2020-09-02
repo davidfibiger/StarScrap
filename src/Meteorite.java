@@ -32,11 +32,17 @@ public class Meteorite extends Drawable{
 		}else {
 			setDeltas(StarScrapMain.gameStatus.player2);
 		}
-		
 		direction = Math.atan(deltaY/deltaX);
+		if(deltaX<0) {
+			direction += Math.PI;
+		}
+		
+		
 		speedX = Math.cos(direction) * speed;
 		speedY = Math.sin(direction) * speed;
 		StarScrapMain.gameStatus.drawables.add(this);
+		//kbjif(img<1)
+			//System.out.println(speedX);
 	}
 	public void setDeltas(Player player) {
 		deltaX = player.x - x;
@@ -52,6 +58,7 @@ public class Meteorite extends Drawable{
 		
 		if(x < -1000 || x > 1000 + StarScrapMain.canvas.getWidth() || y < -1000 || y > 1000 + StarScrapMain.canvas.getHeight()) {
 			StarScrapMain.gameStatus.junk.add(this);
+			
 		}
 	}
 	public void paint(Graphics g, GameStatus gameStatus) {
@@ -74,19 +81,26 @@ public class Meteorite extends Drawable{
 			//up
 			x = -250 + ((Math.random() * StarScrapMain.canvas.getWidth()) + Math.random() * 500);
 			y = -250;
+			
 		}else if(spawningField < 2) {
 			//down
 			x = -250 + ((Math.random() * StarScrapMain.canvas.getWidth()) + Math.random() * 500);
 			y = 250 + StarScrapMain.canvas.getHeight();
+			
 		}else if(spawningField < 3) {
 			//left
 			x = -250;
 			y = -250 + ((Math.random() * StarScrapMain.canvas.getHeight()) + Math.random() * 500);
+			
 		}else{
 			//right
+			//System.out.println("right");
 			x = 250 + StarScrapMain.canvas.getWidth();
 			y = -250 + ((Math.random() * StarScrapMain.canvas.getHeight()) + Math.random() * 500);
-			System.out.println("right");
+			//System.out.println("x:"+x);
+			//System.out.println("y:"+y);
+			
+			
 		}
 	}
 	
