@@ -251,7 +251,7 @@ public class Player extends Drawable {
 			}
 			
 		}
-		
+		//setSpeeds();
 	}
 	
 	

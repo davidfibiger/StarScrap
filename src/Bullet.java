@@ -5,7 +5,7 @@ import java.awt.Point;
 
 public class Bullet extends Drawable {
 	private long lastTime;
-	private int direction;
+	//private int direction;
 	public int order;
 	private Image starShip;
 	public boolean laser;
@@ -98,37 +98,38 @@ public class Bullet extends Drawable {
 	
 	public void move() {
 		long time = System.currentTimeMillis();
-		if(direction == 0)
+		if(direction == 0) {
 			y -= calculateMovement(time, lastTime, speed);
-		
+		}
 		if(direction == 1) {
 			y -= calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
 			x += calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
 		}
 		
-		if(direction == 2)
+		if(direction == 2) {
 			x += calculateMovement(time, lastTime, speed);
-		
+		}
 		if(direction == 3) {
 			y += calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
 			x += calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
 		}
 		
-		if(direction == 4)
+		if(direction == 4) {
 			y += calculateMovement(time, lastTime, speed);
-		
+		}
 		if(direction == 5) {
 			y += calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
 			x -= calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
 		}
 		
-		if(direction == 6)
-			x -= calculateMovement(time, lastTime, speed);
-		
+		if(direction == 6) {
+			x -= calculateMovement(time, lastTime, speed);			
+		}
 		if(direction == 7) {
 			y -= calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
 			x -= calculateMovement(time, lastTime, speed)/ Math.sqrt(2);
 		}
+		setSpeeds();
 		
 		lastTime = time;		
 	}

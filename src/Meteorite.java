@@ -8,8 +8,8 @@ public class Meteorite extends Drawable{
 	private int target;
 	private double spawningField;
 	//private double speed;
-	private double speedX;
-	private double speedY;
+	//private double speedX;
+	//private double speedY;
 	double deltaX;
 	double deltaY;
 	private double img;
@@ -41,7 +41,7 @@ public class Meteorite extends Drawable{
 		speedX = Math.cos(direction) * speed;
 		speedY = Math.sin(direction) * speed;
 		StarScrapMain.gameStatus.drawables.add(this);
-		//kbjif(img<1)
+		//if(img<1)
 			//System.out.println(speedX);
 	}
 	public void setDeltas(Player player) {

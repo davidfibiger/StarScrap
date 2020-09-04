@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public  class Drawable {
 	double defaultSpeed;
 	double speed;
+	double speedX;
+	double speedY;
+	int direction;
 	double boost;
 	double x;
 	double y;	
@@ -156,4 +159,38 @@ public  class Drawable {
 	    	g2d.rotate(-Math.toRadians(rotationInDegrees));
 	    }
 	}
+	public void setSpeeds() {
+		if(direction == 0) {			
+			speedY = -speed;
+		}
+		if(direction == 1) {			
+			speedY = -speed;
+			speedX = speed;
+		}
+		
+		if(direction == 2) {			
+			speedX = speed;
+		}
+		if(direction == 3) {			
+			speedX = speed;
+			speedY = speed;
+		}
+		
+		if(direction == 4) {			
+			speedY = speed;
+		}
+		if(direction == 5) {			
+			speedX = -speed;
+			speedY = speed;
+		}
+		
+		if(direction == 6) {			
+			speedX = -speed;
+		}
+		if(direction == 7) {			
+			speedY = -speed;
+			speedX = -speed;
+		}
+	}
+	
 }

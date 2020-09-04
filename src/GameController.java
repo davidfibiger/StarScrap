@@ -161,7 +161,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 	}
 	public void playersManagement() {
 		for(Player player : gameStatus.players) {
-			
+			player.setSpeeds();
 			player.movementListener(gameStatus, keysDown);
 			player.actions(keysDown, gameStatus);
 			player.energyUpdate();
@@ -203,7 +203,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 	}
 	public void explosion(Drawable drawable,int size, Color color) {
 		for(int a = 0; a < size; a++) {
-			Spark spark = new Spark((int)(drawable.x + drawable.width/2), (int)(drawable.y + drawable.height/2), size, color);
+			Spark spark = new Spark((int)(drawable.x + drawable.width/2), (int)(drawable.y + drawable.height/2), size, color, drawable.speedX, drawable.speedY);
 			gameStatus.sparks.add(spark);
 			gameStatus.drawables.add(spark);
 		}
