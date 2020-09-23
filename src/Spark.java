@@ -25,8 +25,8 @@ public class Spark extends Drawable{
 		long time = System.currentTimeMillis();
 		
 		if(lastTime > 0) {
-			x += (Math.sin(direction) * calculateMovement(time, lastTime, speed))+calculateMovement(time, lastTime, dSpeedX);
-			y += (Math.cos(direction) * calculateMovement(time, lastTime, speed))+calculateMovement(time, lastTime, dSpeedY);
+			x += (Math.sin(direction) * calculateMovement(time, lastTime, speed))/*+calculateMovement(time, lastTime, dSpeedX)*/;
+			y += (Math.cos(direction) * calculateMovement(time, lastTime, speed))/*+calculateMovement(time, lastTime, dSpeedY)*/;
 		}
 		lastTime = time;
 		

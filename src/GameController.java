@@ -129,9 +129,9 @@ public class GameController extends MouseAdapter implements KeyListener{
 		gameStatus.meteorites.add(m);
 	}
 	public void createPlayers() {
-		gameStatus.player1 = new Player(1, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SHIFT, KeyEvent.VK_SPACE, KeyEvent.VK_1);
+		gameStatus.player1 = new Player(1, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SHIFT, KeyEvent.VK_SPACE, KeyEvent.VK_F1);
 		gameStatus.addPlayer(gameStatus.player1);
-		gameStatus.player2 = new Player(2, KeyEvent.VK_I, KeyEvent.VK_K, KeyEvent.VK_J, KeyEvent.VK_L, KeyEvent.VK_B,KeyEvent.VK_ENTER,KeyEvent.VK_2);
+		gameStatus.player2 = new Player(2, KeyEvent.VK_I, KeyEvent.VK_K, KeyEvent.VK_J, KeyEvent.VK_L, KeyEvent.VK_B,KeyEvent.VK_ENTER,KeyEvent.VK_F2);
 		gameStatus.addPlayer(gameStatus.player2);
 	}
 	public void bulletsManagement() {
@@ -221,7 +221,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 	public void mousePressed(MouseEvent e) {
 		//System.out.println(e.getX()+", "+e.getY());
 		if(gameStatus.skinPick) {
-			chooseStarShip(e);
+			chooseStarShip(e,null);
 		}
 		if(gameStatus.menu) {
 			menu(e);
@@ -237,30 +237,44 @@ public class GameController extends MouseAdapter implements KeyListener{
 		}
 		
 	}
-	private void chooseStarShip(MouseEvent e) {
-		
-		int x = (int)canvas.getWidth()/7;
-		int y = ((int)canvas.getHeight()/7)*3;
-		if(e.getY() > y && e.getY() < (y/3)*4) {
-			if(e.getX() > x && e.getX() < x*2) {				
-							
+	private void chooseStarShip(MouseEvent e, KeyEvent k) {
+		if(k != null) {
+			if(keysDown.contains(KeyEvent.VK_1)) {
 				gameStatus.activeSkinPickPlayers.get(0).starShip = StarScrapMain.starShip1;
-				endOrContinueMenu();				
+				endOrContinueMenu();
 			}
-			
-			if (e.getX() > x*3 && e.getX() < x*4) {				
-				
+			if(keysDown.contains(KeyEvent.VK_2)) {
 				gameStatus.activeSkinPickPlayers.get(0).starShip = StarScrapMain.starShip2;
 				endOrContinueMenu();
-				
 			}
-			if(e.getX() > x*5 && e.getX() < x*6) {	
-				
+			if(keysDown.contains(KeyEvent.VK_3)) {
 				gameStatus.activeSkinPickPlayers.get(0).starShip = StarScrapMain.starShip3;
 				endOrContinueMenu();
 			}
 		}
-		
+		if(e != null) {
+			int x = (int)canvas.getWidth()/7;
+			int y = ((int)canvas.getHeight()/7)*3;
+			if(e.getY() > y && e.getY() < (y/3)*4) {
+				if(e.getX() > x && e.getX() < x*2) {				
+								
+					gameStatus.activeSkinPickPlayers.get(0).starShip = StarScrapMain.starShip1;
+					endOrContinueMenu();				
+				}
+				
+				if (e.getX() > x*3 && e.getX() < x*4) {				
+					
+					gameStatus.activeSkinPickPlayers.get(0).starShip = StarScrapMain.starShip2;
+					endOrContinueMenu();
+					
+				}
+				if(e.getX() > x*5 && e.getX() < x*6) {	
+					
+					gameStatus.activeSkinPickPlayers.get(0).starShip = StarScrapMain.starShip3;
+					endOrContinueMenu();
+				}
+			}
+		}
 	}
 	public void endOrContinueMenu() {		
 		gameStatus.activeSkinPickPlayers.remove(0);
@@ -282,6 +296,9 @@ public class GameController extends MouseAdapter implements KeyListener{
 			keysDown.add(e.getKeyCode());
 			//System.out.println(e.getKeyCode());
 			//System.out.println(e.getKeyCode());
+		}
+		if(gameStatus.skinPick) {
+			chooseStarShip(null,e);
 		}
 		
 	}
