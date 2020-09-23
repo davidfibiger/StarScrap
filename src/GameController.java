@@ -194,14 +194,14 @@ public class GameController extends MouseAdapter implements KeyListener{
 		if(!gameStatus.activeSkinPickPlayers.contains(player)) {
 			explosion(player, 100, player.color);
 			gameStatus.getSoundFrom(gameStatus.deathSounds).play();
-			gameStatus.activeSkinPickPlayers.add(player);
-			player.starShip = null;
-			gameStatus.skinPick = true;
+			//gameStatus.activeSkinPickPlayers.add(player);
+			//player.starShip = null;
+			//gameStatus.skinPick = true;
 			player.lives = player.maxLives;			
 			player.roundLives --;
 			if(player.roundLives <= 0){
 				explosion(player, 1000, player.color);
-				gameStatus.skinPick = false;
+				//gameStatus.skinPick = false;
 				gameStatus.menu = true;
 				for(Player junkPlayer: gameStatus.players) {
 					gameStatus.junk.add(junkPlayer);

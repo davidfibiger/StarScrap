@@ -31,7 +31,7 @@ public class Player extends Drawable {
 	private long lastLaser = 0;
 	private boolean shooted = false;
 	public int order;
-	public int roundLives = 2;
+	public int roundLives = 8;
 	public final int maxLives = 6;
 	public int lives = maxLives;
 	public final int maxEnergy = 100;
