@@ -197,7 +197,16 @@ public class GameController extends MouseAdapter implements KeyListener{
 			gameStatus.activeSkinPickPlayers.add(player);
 			player.starShip = null;
 			gameStatus.skinPick = true;
-			player.lives = player.maxLives;
+			player.lives = player.maxLives;			
+			player.roundLives --;
+			if(player.roundLives <= 0){
+				explosion(player, 1000, player.color);
+				gameStatus.skinPick = false;
+				gameStatus.menu = true;
+				for(Player junkPlayer: gameStatus.players) {
+					gameStatus.junk.add(junkPlayer);
+				}
+			}
 			player.toRandomPosition(player);
 		}
 	}
@@ -215,6 +224,8 @@ public class GameController extends MouseAdapter implements KeyListener{
 			gameStatus.bullets.remove(drawable);
 			gameStatus.drawables.remove(drawable);
 			gameStatus.meteorites.remove(drawable);
+			gameStatus.players.remove(drawable);
+			gameStatus.activeSkinPickPlayers.remove(drawable);
 		}
 		gameStatus.junk.clear();
 	}

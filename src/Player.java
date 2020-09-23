@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -28,7 +30,8 @@ public class Player extends Drawable {
 	private long lastShot = 0;
 	private long lastLaser = 0;
 	private boolean shooted = false;
-	public int order;	
+	public int order;
+	public int roundLives = 2;
 	public final int maxLives = 6;
 	public int lives = maxLives;
 	public final int maxEnergy = 100;
@@ -87,10 +90,22 @@ public class Player extends Drawable {
 		
 		drawHpBar(g, gameStatus);
 		drawEnergyBar(g, gameStatus);
-		
+		drawRoundLives(g, gameStatus);
 		
 	}
-	
+	private void drawRoundLives(Graphics g, GameStatus gameStatus) {
+		String roundLives = String.valueOf(this.roundLives);
+		color = setColor(g, starShip);
+		Font font = new Font(Font.SANS_SERIF, 0, (gameStatus.getCanvas().getWidth()/20));
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		int width = metrics.stringWidth(roundLives);
+		if(order == 1) {
+			g.drawString(roundLives, (int)(gameStatus.getCanvas().getWidth() * ((double)3/8)) - width/2, gameStatus.getCanvas().getHeight()/10);
+		}else {
+			g.drawString(roundLives, (int)(gameStatus.getCanvas().getWidth() * ((double)5/8)) - width/2, gameStatus.getCanvas().getHeight()/10);
+		}
+	}
 	private void drawEnergyBar(Graphics g, GameStatus gameStatus) {
 		//g.setColor(Color.WHITE);
 		color = setColor(g, starShip);

@@ -39,7 +39,10 @@ public class DrawingCanvas extends Canvas {
         	drawable.paint(g, StarScrapMain.gameStatus);
         	 
         }
-        drawText(g, String.valueOf(fps));
+        drawText(g, "fps: "+String.valueOf(fps));
+        
+        
+        
         if(GameStatus.menu) {
         	//g.drawImage(StarScrapMain.logo, (int)getWidth()/8, -(int)getHeight()/8, (int)((getWidth()/4)*3), (int)((getHeight()/4)*3), null);
         	g.drawImage(StarScrapMain.logo,(int)getWidth()/8, -(int)getHeight()/8, null);
@@ -60,9 +63,12 @@ public class DrawingCanvas extends Canvas {
 		strategy.show();
 	}
 	private void drawText(Graphics g, String text) {
+		Font font = new Font(Font.SANS_SERIF, 0, (getWidth()/80));
 		g.setColor(new Color(0, 245, 0));
-        g.setFont(new Font(Font.SANS_SERIF, 0, (getWidth()/80)));
-        g.drawString("fps: " + text, getWidth() - getWidth()/2 - text.length()*(getWidth()/128), getHeight()/10);
+        g.setFont(font);
+        FontMetrics metrics = g.getFontMetrics(font);
+        int width = metrics.stringWidth(text);
+        g.drawString(text, getWidth() - getWidth()/2 - width/2, getHeight()/10);
 	}
 	
 	
