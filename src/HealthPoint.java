@@ -18,15 +18,17 @@ public class HealthPoint extends Drawable{
 		if(lastBeat+250<System.currentTimeMillis()) {
 			lastBeat = System.currentTimeMillis();
 			if(!beat) {
-				x -= canvasWidth / 26331.5;
-				y -= canvasWidth / 26331.5;
-				width = canvasWidth/70;//54,85714285714286
+				x -= ((canvasWidth / 70) - (canvasWidth/80))/2;
+				y -= ((canvasWidth / 70) - (canvasWidth/80))/2;
+				width = canvasWidth/70;
+				height = width;
 				beat = true;
 			}else {
 				beat = false;
-				x += canvasWidth / 26331.5;
-				y += canvasWidth / 26331.5;
-				width = canvasWidth/80;//48
+				x += ((canvasWidth / 70) - (canvasWidth/80))/2;
+				y += ((canvasWidth / 70) - (canvasWidth/80))/2;
+				width = canvasWidth/80;
+				height = width;
 			}
 		}
 		if(spawnTime + despawnTime<System.currentTimeMillis()) {
