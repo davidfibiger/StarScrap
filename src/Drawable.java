@@ -20,6 +20,8 @@ public  class Drawable {
 	double y;	
 	double width;
 	double height;
+	double canvasWidth = StarScrapMain.canvas.getWidth();
+	double canvasHeight = StarScrapMain.canvas.getHeight();
 	
 	public double getWidth() {
 		return width;

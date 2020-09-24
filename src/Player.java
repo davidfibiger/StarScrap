@@ -30,6 +30,7 @@ public class Player extends Drawable {
 	private long lastShot = 0;
 	private long lastLaser = 0;
 	private boolean shooted = false;
+	private long lastHPUpdate;
 	public int order;
 	public int roundLives = 8;
 	public final int maxLives = 6;
@@ -342,7 +343,7 @@ public class Player extends Drawable {
 		}
 		
 	}
-	public void energyUpdate() {
+	public void Update() {
 		if(System.currentTimeMillis() >= lastEnergyUpdate + 25) {
 			if(energy < maxEnergy && speed != defaultSpeed + boost)
 				energy++;
@@ -351,6 +352,13 @@ public class Player extends Drawable {
 				energy = energy - 1;				
 			}
 			lastEnergyUpdate = System.currentTimeMillis();			
+		}
+		if(lives <= maxLives) {
+			lastHPUpdate = System.currentTimeMillis();
+		}
+		if(System.currentTimeMillis()>lastHPUpdate + 5000) {
+			lives--;
+			lastHPUpdate = System.currentTimeMillis();
 		}
 	}
 

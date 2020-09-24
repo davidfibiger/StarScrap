@@ -13,6 +13,7 @@ public class GameStatus {
 	ArrayList<Meteorite> meteorites;
 	public ArrayList<Star> stars;
 	public ArrayList<Spark> sparks;
+	public ArrayList<HealthPoint> healthPoints;
 	public ArrayList<Sound> shotSounds;
 	public ArrayList<Sound> deathSounds;
 	public ArrayList<Sound> laserSounds;
@@ -36,6 +37,7 @@ public class GameStatus {
 		meteorites = new ArrayList<Meteorite>();
 		drawables = new ArrayList();
 		players = new ArrayList();
+		healthPoints = new ArrayList();
 		junk = new ArrayList();
 		bullets = new ArrayList();
 		usedLasers = new ArrayList();

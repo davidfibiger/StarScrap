@@ -17,6 +17,8 @@ public class GameController extends MouseAdapter implements KeyListener{
 	private long lastFrame = System.currentTimeMillis();
 	private long lastStar = System.currentTimeMillis();
 	private long lastMeteorite = System.currentTimeMillis();
+	private long lastHealthPoint = System.currentTimeMillis();
+	private double randomHealthPointSpawnTime = 2000 + Math.random()*4000;
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	GameStatus gameStatus;
 	DrawingCanvas canvas;
@@ -43,6 +45,9 @@ public class GameController extends MouseAdapter implements KeyListener{
 				/*for(Integer k : keysDown) {
 					System.out.println(k);
 				}*/
+				if(gameStatus.menu || gameStatus.skinPick) {
+					lastHealthPoint = System.currentTimeMillis();
+				}
 				lastFrame = System.currentTimeMillis();
 				if(keysDown.contains(KeyEvent.VK_ESCAPE)) {
 					System.exit(0);
@@ -50,7 +55,8 @@ public class GameController extends MouseAdapter implements KeyListener{
 				starsManagement();
 				sparksManegement();
 				playersManagement();
-				bulletsManagement();	
+				bulletsManagement();
+				healthPointsManagement();
 				if(!gameStatus.menu) {
 					meteoriteManagement();
 				}else {
@@ -74,6 +80,26 @@ public class GameController extends MouseAdapter implements KeyListener{
 			
 		}
 		  
+		
+	}
+	private void healthPointsManagement() {
+		
+		if(lastHealthPoint + randomHealthPointSpawnTime < System.currentTimeMillis() && !gameStatus.menu) {
+			HealthPoint hp = new HealthPoint();
+			gameStatus.healthPoints.add(hp);
+			gameStatus.drawables.add(hp);
+			randomHealthPointSpawnTime = 2000 + Math.random()*4000;
+			lastHealthPoint = System.currentTimeMillis();
+		}
+		for(HealthPoint healthPoint : gameStatus.healthPoints) {
+			healthPoint.update(gameStatus);
+			for(Player player : gameStatus.players) {
+				if(healthPoint.checkColision(healthPoint, player)) {
+					gameStatus.junk.add(healthPoint);
+					player.lives++;
+				}
+			}
+		}
 		
 	}
 	private void meteoriteManagement() {		
@@ -164,7 +190,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 			player.setSpeeds();
 			player.movementListener(gameStatus, keysDown);
 			player.actions(keysDown, gameStatus);
-			player.energyUpdate();
+			player.Update();
 		}
 	}
 	public void sparksManegement() {
@@ -228,6 +254,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 			gameStatus.activeSkinPickPlayers.remove(drawable);
 			gameStatus.stars.remove(drawable);
 			gameStatus.sparks.remove(drawable);
+			gameStatus.healthPoints.remove(drawable);
 		}
 		gameStatus.junk.clear();
 	}
