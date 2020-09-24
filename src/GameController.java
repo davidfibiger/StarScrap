@@ -226,6 +226,8 @@ public class GameController extends MouseAdapter implements KeyListener{
 			gameStatus.meteorites.remove(drawable);
 			gameStatus.players.remove(drawable);
 			gameStatus.activeSkinPickPlayers.remove(drawable);
+			gameStatus.stars.remove(drawable);
+			gameStatus.sparks.remove(drawable);
 		}
 		gameStatus.junk.clear();
 	}
