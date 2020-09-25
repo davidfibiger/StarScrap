@@ -60,6 +60,7 @@ public class GameStatus {
 		*/
 		
 	}
+	
 	public void addPlayer(Player player) {
 		activeSkinPickPlayers.add(player);
 		drawables.add(player);

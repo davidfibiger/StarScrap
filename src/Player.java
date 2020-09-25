@@ -89,9 +89,7 @@ public class Player extends Drawable {
 	    		 	
 	    }
 		
-		drawHpBar(g, gameStatus);
-		drawEnergyBar(g, gameStatus);
-		drawRoundLives(g, gameStatus);
+		
 		
 	}
 	private void drawRoundLives(Graphics g, GameStatus gameStatus) {
@@ -135,6 +133,11 @@ public class Player extends Drawable {
 		}
 	}
 
+	public void drawHud(Graphics g, GameStatus gameStatus) {
+		drawHpBar(g, gameStatus);
+		drawEnergyBar(g, gameStatus);
+		drawRoundLives(g, gameStatus);
+	}
 
 
 	private void drawHpBar(Graphics g, GameStatus gameStatus) {

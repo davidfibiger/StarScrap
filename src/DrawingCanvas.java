@@ -34,10 +34,14 @@ public class DrawingCanvas extends Canvas {
 	}
 	public void paint(Graphics g, int fps){
        	
-        for(int i = 0; i < StarScrapMain.gameStatus.drawables.size(); i++) {
-        	Drawable drawable = StarScrapMain.gameStatus.drawables.get(i);
+        for(int d = 0; d < StarScrapMain.gameStatus.drawables.size(); d++) {
+        	Drawable drawable = StarScrapMain.gameStatus.drawables.get(d);
         	drawable.paint(g, StarScrapMain.gameStatus);
         	 
+        }
+        for(int p = 0; p < StarScrapMain.gameStatus.players.size(); p++) {
+        	Player player = StarScrapMain.gameStatus.players.get(p);
+        	player.drawHud(g, StarScrapMain.gameStatus);
         }
         drawText(g, "fps: "+String.valueOf(fps));
         
