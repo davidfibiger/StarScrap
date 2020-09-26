@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class GameController extends MouseAdapter implements KeyListener{
@@ -155,9 +156,10 @@ public class GameController extends MouseAdapter implements KeyListener{
 		gameStatus.meteorites.add(m);
 	}
 	public void createPlayers() {
-		gameStatus.player1 = new Player(1, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SHIFT, KeyEvent.VK_SPACE, KeyEvent.VK_F1);
+		Map<String, Integer> controls = StarScrapMain.controls;
+		gameStatus.player1 = new Player(1, controls.get("PLAYER1.UP"), controls.get("PLAYER1.DOWN"), controls.get("PLAYER1.LEFT"), controls.get("PLAYER1.RIGHT"), controls.get("PLAYER1.BOOST"), controls.get("PLAYER1.FIRE"), controls.get("PLAYER1.CHANGESKIN"));
 		gameStatus.addPlayer(gameStatus.player1);
-		gameStatus.player2 = new Player(2, KeyEvent.VK_U, KeyEvent.VK_J, KeyEvent.VK_H, KeyEvent.VK_K, KeyEvent.VK_V,KeyEvent.VK_ENTER,KeyEvent.VK_F2);
+		gameStatus.player2 = new Player(2, controls.get("PLAYER2.UP"), controls.get("PLAYER2.DOWN"), controls.get("PLAYER2.LEFT"), controls.get("PLAYER2.RIGHT"), controls.get("PLAYER2.BOOST"), controls.get("PLAYER2.FIRE"), controls.get("PLAYER2.CHANGESKIN"));
 		gameStatus.addPlayer(gameStatus.player2);
 	}
 	public void bulletsManagement() {
