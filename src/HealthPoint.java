@@ -39,5 +39,10 @@ public class HealthPoint extends Drawable{
 		g.setColor(new Color(158,19,22));
 		g.fillRect((int)x, (int)(y+height*((double)3/8)), (int)width, (int)(height/4));
 		g.fillRect((int)(x+width*((double)3/8)), (int)y, (int)width/4, (int)height);
+		g.setColor(Color.white);
+		g.drawRect((int)x, (int)(y+height*((double)3/8)), (int)width, (int)(height/4));
+		g.drawRect((int)(x+width*((double)3/8)), (int)y, (int)width/4, (int)height);
+		g.setColor(new Color(158,19,22));
+		g.drawRect((int)(x+width*((double)3/8)), (int)(y+height*((double)3/8)),(int)width/4 , (int)(height/4));
 	}
 }

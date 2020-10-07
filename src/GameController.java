@@ -77,7 +77,7 @@ public class GameController extends MouseAdapter implements KeyListener{
 				}
 				canvas.newFrame(fps);
 			}
-			
+		
 			
 		}
 		  
