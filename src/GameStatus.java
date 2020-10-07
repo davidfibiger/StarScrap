@@ -18,6 +18,7 @@ public class GameStatus {
 	public ArrayList<Sound> deathSounds;
 	public ArrayList<Sound> laserSounds;
 	public ArrayList<Sound> colisionSounds;
+	public ArrayList<Shield> shields;
 	static boolean skinPick = false;
 	static boolean menu = true;
 	//Player activeMenuPlayer;
@@ -44,7 +45,7 @@ public class GameStatus {
 		activeSkinPickPlayers = new ArrayList();
 		stars = new ArrayList();
 		sparks = new ArrayList();
-		
+		shields = new ArrayList();
 		
 		//player3 = new Player(3, 101, 98, 97, 99, 96, 10,KeyEvent.VK_3);
 		//activeMenuPlayer = player1;
@@ -60,7 +61,13 @@ public class GameStatus {
 		*/
 		
 	}
-	
+	public void explosion(Drawable drawable,int size, Color color) {
+		for(int a = 0; a < size; a++) {
+			Spark spark = new Spark((int)(drawable.x + drawable.width/2), (int)(drawable.y + drawable.height/2), size, color, drawable.speedX, drawable.speedY);
+			sparks.add(spark);
+			drawables.add(spark);
+		}
+	}
 	public void addPlayer(Player player) {
 		activeSkinPickPlayers.add(player);
 		drawables.add(player);

@@ -39,6 +39,7 @@ public class Player extends Drawable {
 	public int energy = maxEnergy;
 	public int direction;
 	public Color color;
+	public Shield shield;
 	
 	public Player(int order, int forwardKey, int backwardsKey, int leftwardsKey, int rightwardsKey, int boostKey, int shootingKey, int skinKey) {		
 		GameStatus.skinPick = true;
@@ -262,11 +263,28 @@ public class Player extends Drawable {
 		
 		if(keysDown.contains(boostKey) && energy >= 1) {
 			if(speed == defaultSpeed) {
-				speed += boost;				
-			}			
+				speed += boost;		
+				if(energy >= 10) {
+					shield = new Shield(order, direction, this);
+					gameStatus.drawables.add(shield);
+					gameStatus.shields.add(shield);
+				}
+			
+			}	
+			for(Shield shield : gameStatus.shields) {
+				shield.update(order, direction, this);
+				for(Meteorite meteorite : gameStatus.meteorites) {
+					if(meteorite.checkColision(meteorite, shield)) {
+						gameStatus.junk.add(meteorite);
+						gameStatus.explosion(meteorite, 30, meteorite.color);
+						StarScrapMain.gameStatus.getSoundFrom(StarScrapMain.gameStatus.colisionSounds).play();
+					}
+				}
+			}
 		}else {
 			if(speed == defaultSpeed + boost){
 				speed = defaultSpeed;
+				gameStatus.junk.add(shield);
 			}
 			
 		}
